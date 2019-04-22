@@ -18,7 +18,7 @@
 	$('.products-slick').each(function() {
 		var $this = $(this),
 				$nav = $this.attr('data-nav');
-
+        console.log($this);
 		$this.slick({
 			slidesToShow: 4,
 			slidesToScroll: 1,
