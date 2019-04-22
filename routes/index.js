@@ -20,4 +20,9 @@ router.get('/login', function(req, res, next) {
 router.get('/signup', function(req, res, next) {
   res.render('user/signup', { title: 'Signup' });
 });
+
+/* GET forget password page. */
+router.get('/forget-password', function(req, res, next) {
+  res.render('user/forgetPass', { title: 'Forget password' });
+});
 module.exports = router;
