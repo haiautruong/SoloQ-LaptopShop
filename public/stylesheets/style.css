@@ -2188,3 +2188,108 @@ textarea.input {
     margin-top: 10px;
   }
 }
+
+
+/*=========================================================
+	14 -> Login
+===========================================================*/
+.mycolor{
+  color : #009e4c;
+}        
+.myborder{
+  padding: 20px;;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: 0px 0px 3px 0px #009e4c;
+  -moz-box-shadow:    0px 0px 3px 0px #009e4c;
+  box-shadow:         0px 0px 3px 0px #009e4c;
+}
+.mybutton{
+  position: relative;
+  left: 50%;
+  top: 193px;
+
+}
+.margin-bottom-20 {
+  margin-bottom: 20px;
+
+}
+.margin-top-50 {
+  margin-top: 50px;
+
+}
+.btn-u:hover {
+  background: #fff;
+  border: 0.2px solid #009e4c;
+  color: #009e4c;
+  font-weight: 800
+}
+
+.btn-u:hover {
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.btn-u {
+  background: #009e4c;
+}
+.btn-u {
+  white-space: nowrap;
+  border: 0;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 400;
+  padding: 6px 13px;
+  position: relative;
+  background: #009e4c;
+  display: inline-block;
+  text-decoration: none;
+}
+.input-group-addon {
+  border-right: 0;
+  /*color: #b3b3b3;*/
+  font-size: 14px;
+  background: #fff;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.input-group .form-control {
+  float: left;
+  width: 100%;
+  margin-bottom: 0;
+}
+.form-control {
+  box-shadow: none;
+}
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px !important;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid  #009e4c !important;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+.text-italic{
+  color: #009e4c;
+  font-size: 12px;
+  font-style: italic;
+}
