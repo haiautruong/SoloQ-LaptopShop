@@ -789,7 +789,7 @@ textarea.input {
   padding: 60px 0px;
   margin: 30px 0px;
   background-color: #E4E7ED;
-  background-image: url('../img/hotdeal.png');
+  background-image: url('/images/hotdeal.png');
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -952,7 +952,7 @@ textarea.input {
 }
 
 .product .product-body .product-rating>i.fa-star {
-  color: #ef233c;
+  color: #009e4c;
 }
 
 .product .product-body .product-rating:after {
@@ -1041,7 +1041,7 @@ textarea.input {
   border: 2px solid transparent;
   height: 40px;
   padding: 0 30px;
-  background-color: #ef233c;
+  background-color: #009e4c;
   color: #FFF;
   text-transform: uppercase;
   font-weight: 700;
@@ -1535,7 +1535,7 @@ textarea.input {
   border: 2px solid transparent;
   height: 40px;
   padding: 0 30px;
-  background-color: #ef233c;
+  background-color: #009e4c;
   color: #FFF;
   text-transform: uppercase;
   font-weight: 700;
