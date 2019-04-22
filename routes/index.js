@@ -25,4 +25,9 @@ router.get('/signup', function(req, res, next) {
 router.get('/forget-password', function(req, res, next) {
   res.render('user/forgetPass', { title: 'Forget password' });
 });
+
+/* GET update info page. */
+router.get('/update-info', function(req, res, next) {
+  res.render('user/updateInfo', { title: 'Update Information' });
+});
 module.exports = router;
