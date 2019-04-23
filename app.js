@@ -5,15 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var exphbs = require('express-handlebars');
 
-var indexRouter = require('./routes/index');
+var productRouter = require('./routes/productController');
 var usersRouter = require('./routes/users');
 var adminRouter = require('./routes/adminController');
+var homeRouter = require('./routes/homeController');
 
 var app = express();
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
-  layoutsDir: 'views/_layouts/'
+  layoutsDir: 'views/layouts'
 }));
 
 // view engine setup
@@ -26,9 +27,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/admin', adminRouter);
+app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
