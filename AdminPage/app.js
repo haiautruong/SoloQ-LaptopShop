@@ -1,19 +1,14 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var exphbs = require('express-handlebars');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const exphbs = require('express-handlebars');
 
-var productRouter = require('./routes/productController');
-var usersRouter = require('./routes/users');
-var adminRouter = require('./routes/adminController');
-var homeRouter = require('./routes/homeController');
-
-var app = express();
+const app = express();
 
 app.engine('hbs', exphbs({
-  defaultLayout: 'main',
+  defaultLayout: 'admin',
   layoutsDir: 'views/layouts'
 }));
 
@@ -27,10 +22,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', homeRouter);
-app.use('/users', usersRouter);
+const adminRouter = require('./routes/admin');
 app.use('/admin', adminRouter);
-app.use('/product', productRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
