@@ -4,12 +4,19 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const exphbs = require('express-handlebars');
-
+const productHelpers = require('./helpers/productHelper');
+const database = require('./database/index');
+const Product = require('./models/product');
+const Category = require('./models/category');
 const app = express();
+const configDB = require('./config/mongodb');
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
-  layoutsDir: 'views/layouts'
+  layoutsDir: 'views/layouts',
+  helpers: {
+    getStar: productHelpers.showStar
+  }
 }));
 
 // view engine setup
@@ -22,7 +29,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 const productRouter = require('./routes/product');
 app.use('/product', productRouter);
 
@@ -32,7 +38,17 @@ app.use('/users', usersRouter);
 const homeRouter = require('./routes/index');
 app.use('/', homeRouter);
 
+database.connect().then((clientDB)=>{
+  console.log('Connect database success');
+  app.db = clientDB.db(configDB.databaseName);
+  app.productModel = new Product(app.db);
+  app.categoryModel = new Category(app.db);
 
+  console.log("Affter connect", app.productModel);
+}).catch((err)=>{
+  console.log('Connect database err: ' + err);
+  throw(err);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

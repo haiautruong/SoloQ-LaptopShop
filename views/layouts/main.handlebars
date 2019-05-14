@@ -79,7 +79,7 @@
                         <div class="col-md-3">
                             <div class="header-logo">
                                 <a href="#" class="logo">
-                                    <img src="../../build/images/logo.png" alt="">
+                                    <img src="../images/logo.png" alt="">
                                 </a>
                             </div>
                         </div>
@@ -197,24 +197,15 @@
                 <div id="responsive-nav">
                     <!-- NAV -->
                     <ul class="main-nav nav navbar-nav">
-                        <li class="active">
+                        <li>
                             <a href="#">Trang chủ</a>
                         </li>
+                        {{#each listAllCategories}}
                         <li>
-                            <a href="#">Bán chạy</a>
+                            <a href="#">{{categoryName}}</a>
                         </li>
-                        <li>
-                            <a href="#">Laptops</a>
-                        </li>
-                        <li>
-                            <a href="#">Cameras</a>
-                        </li>
-                        <li>
-                            <a href="#">Smartphones</a>
-                        </li>
-                        <li>
-                            <a href="#">Phụ kiện</a>
-                        </li>
+                        {{/each}}
+                        
                     </ul>
                     <!-- /NAV -->
                 </div>
