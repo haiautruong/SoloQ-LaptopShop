@@ -2,16 +2,18 @@ class ProductController{
 
     detail(req,res){
         let product = res.app.productModel;
+        let category = res.app.categoryModel;
         let vm = null;
 
         let item = product.getOneProduct(req.query.id);
-        console.log('product', item);
-        Promise.all([item]).then(([pro]) => {
-            console.log("promise", pro);
-            vm = {
-                product: pro
-            }
+        let allCategories = category.getAllCategories();
 
+        Promise.all([item, allCategories]).then(([pro, listCate]) => {
+            console.log("product", pro);
+            vm = {
+                product: pro,
+                listAllCategories: listCate
+            }
             
             res.render("product/detail", vm);
         });
@@ -19,7 +21,19 @@ class ProductController{
     }
 
     gamer(req,res){
-        res.render("product/gamer");
+        let product = res.app.productModel;
+        let category = res.app.categoryModel;
+        let vm = null;
+
+        let allCategories = category.getAllCategories();
+        Promise.all([allCategories]).then(([listCate]) => {
+            vm = {
+                listAllCategories: listCate
+            }
+            res.render("product/gamer", vm);
+        });
+
+        
     }
 }
 

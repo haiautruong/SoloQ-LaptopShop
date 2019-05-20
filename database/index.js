@@ -36,12 +36,12 @@ const find = (db, collection) =>{
     })
 }
 
-const findOne = (db, collection, query, options ={}) => {
+const findOne = (db, collection, query, options = {}) => {
     return new Promise((resolve, reject) => {
         try{
             db.collection(collection).findOne(query, options, (err, result)=>{
                 return (err || !result) ? resolve(null) : resolve(result);
-            })
+            });
         }catch(err){
             reject(err);
         }

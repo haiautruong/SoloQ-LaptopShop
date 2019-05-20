@@ -4,7 +4,7 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
-					{{#each product}}
+					{{#with product}}
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
@@ -52,7 +52,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">{{nameLong}}</h2>
+							<h2 class="product-name">{{nameShort}}</h2>
 							<div>
 								<div class="product-rating">
 									{{{getStar vote}}}
@@ -142,7 +142,17 @@
 								<div id="tab2" class="tab-pane fade in">
 									<div class="row">
 										<div class="col-md-12">
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th scope="col">Thông tin</th>
+														<th scope="col">Mô tả</th>
+													</tr>
+												</thead>
+												<tbody>
+													<th scope="col">Tên sản phẩm</th>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>
@@ -329,8 +339,9 @@
 						</div>
 					</div>
 					<!-- /product tab -->
+					{{/with}}
 				</div>
-				{{/each}}
+				
 				<!-- /row -->
 			</div>
 			<!-- /container -->

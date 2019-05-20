@@ -13,11 +13,10 @@ class HomeControllers{
         let allProducts = product.getAllProduct();
         let allCategories = category.getAllCategories();
 
-        Promise.all([allProducts, allCategories]).then(([listPro, listcate]) => {
-            console.log("promise", allProducts);
+        Promise.all([allProducts, allCategories]).then(([listPro, listCate]) => {
             vm = {
                 listAllProducts: listPro,
-                listAllCategories: listcate
+                listAllCategories: listCate
             }
 
             res.render("index", vm);

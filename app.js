@@ -43,8 +43,6 @@ database.connect().then((clientDB)=>{
   app.db = clientDB.db(configDB.databaseName);
   app.productModel = new Product(app.db);
   app.categoryModel = new Category(app.db);
-
-  console.log("Affter connect", app.productModel);
 }).catch((err)=>{
   console.log('Connect database err: ' + err);
   throw(err);

@@ -13,11 +13,12 @@ class Product {
     }
 
     getOneProduct(id){
-        console.log("id", id);
+        console.log("id", typeof(id));
+        id = parseInt(id);
         const query = {
             id: id
         };
-        return Database.findOne(this.db, COLLECTION, query, option);
+        return Database.findOne(this.db, COLLECTION, query);
     }
 
     getNewProducts(amount){
