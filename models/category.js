@@ -1,16 +1,9 @@
-const Database = require('../database/index');
+const mongoose = require("mongoose");
 
-
-const COLLECTION = 'category';
-class Category{
-    
-    constructor(db){
-        this.db = db;
+const category = new mongoose.Schema(
+    {
+        name: String
     }
+)
 
-    getAllCategories(){
-        return Database.find(this.db, COLLECTION);
-    }
-}
-
-module.exports = Category;
+module.exports = category;

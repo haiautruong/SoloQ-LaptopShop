@@ -1,40 +1,13 @@
-class ProductController{
 
-    detail(req,res){
-        let product = res.app.productModel;
-        let category = res.app.categoryModel;
-        let vm = null;
+let dbs = require('../database/index');
+const mongoose = require('mongoose');
 
-        let item = product.getOneProduct(req.query.id);
-        let allCategories = category.getAllCategories();
+let Product = dbs.product;
+let category = dbs.category;
 
-        Promise.all([item, allCategories]).then(([pro, listCate]) => {
-            console.log("product", pro);
-            vm = {
-                product: pro,
-                listAllCategories: listCate
-            }
-            
-            res.render("product/detail", vm);
-        });
-       
-    }
-
-    gamer(req,res){
-        let product = res.app.productModel;
-        let category = res.app.categoryModel;
-        let vm = null;
-
-        let allCategories = category.getAllCategories();
-        Promise.all([allCategories]).then(([listCate]) => {
-            vm = {
-                listAllCategories: listCate
-            }
-            res.render("product/gamer", vm);
-        });
-
-        
-    }
+exports.detail = (req, res) => {
+    Product.findById(req.params.id)
+    .then(product => {
+        res.render('product/detail', product)
+    });
 }
-
-module.exports = ProductController;

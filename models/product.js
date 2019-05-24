@@ -1,45 +1,11 @@
-const Database = require('../database/index');
+const mongoose = require("mongoose");
 
-
-const COLLECTION = 'product';
-class Product {
-
-    constructor(db){
-        this.db = db;
+productSchema =  mongoose.Schema(
+    {
+        name: String,
+        price: Number,
+        image: String
     }
+)
 
-    getAllProduct(){
-        return Database.find(this.db, COLLECTION);
-    }
-
-    getOneProduct(id){
-        console.log("id", typeof(id));
-        id = parseInt(id);
-        const query = {
-            id: id
-        };
-        return Database.findOne(this.db, COLLECTION, query);
-    }
-
-    getNewProducts(amount){
-
-        let product = {
-            category : 2
-        };
-        //for
-        let category = categoryModel.getCategory(product.category);
-        product.category = category;
-
-        let product = {
-            category : {
-                id: 2,
-                name: 'abc'
-            }
-        };
-
-    return products;
-    }
-
-}
-
-module.exports = Product;
+module.exports = productSchema;

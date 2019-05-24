@@ -5,11 +5,11 @@ var router = express.Router();
  * Routing for Product
  */
 
-const ProductController = require("../controllers/ProductController");
-const controller = new ProductController();
 
-router.get("/detail", (req, res) => controller.detail(req, res));
+const controller = require("../controllers/ProductController"); 
 
-router.get("/gamer", (req, res) => controller.gamer(req, res));
+router.get("/detail/:id", (req, res) => controller.detail(req,res));
+
+router.get("/gamer", (req, res) => res.send(req.params));
 
 module.exports = router;
