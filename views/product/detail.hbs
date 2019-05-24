@@ -4,12 +4,13 @@
 			<div class="container">
 				<!-- row -->
 				<div class="row">
+					{{#if product}}
 					{{#with product}}
 					<!-- Product main img -->
 					<div class="col-md-5 col-md-push-2">
 						<div id="product-main-img">
 							<div class="product-preview">
-								<img src="/images/product01.png" alt="">
+								<img src="/images/{{image}}" alt="">
 							</div>
 
 							<div class="product-preview">
@@ -31,7 +32,7 @@
 					<div class="col-md-2  col-md-pull-5">
 						<div id="product-imgs">
 							<div class="product-preview">
-								<img src="/images/product01.png" alt="">
+								<img src="/images/{{image}}" alt="">
 							</div>
 
 							<div class="product-preview">
@@ -52,7 +53,7 @@
 					<!-- Product details -->
 					<div class="col-md-5">
 						<div class="product-details">
-							<h2 class="product-name">{{this.name}}</h2>
+							<h2 class="product-name">{{name}}</h2>
 							<div>
 								<div class="product-rating">
 									{{{getStar vote}}}
@@ -60,7 +61,7 @@
 								<a class="review-link" href="#">10 Review(s) | Add your review</a>
 							</div>
 							<div>
-								<h3 class="product-price">{{this.price}} <del class="product-old-price">$990.00</del></h3>
+								<h3 class="product-price">{{price}} <del class="product-old-price">$990.00</del></h3>
 								<span class="product-available">In Stock</span>
 							</div>
 							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -76,8 +77,8 @@
 
 							<ul class="product-links">
 								<li>Category:</li>
-								{{#each this.categoryCode.name}}
-								<li><a href="#">{{}}</a></li>
+								{{#each category}}
+								<li><a href="#">{{this.name}}</a></li>
 								{{/each}}
 							</ul>
 
@@ -318,12 +319,13 @@
 					</div>
 					<!-- /product tab -->
 					{{/with}}
+					{{/if}}
 				</div>
 				
 				<!-- /row -->
 			</div>
 			<!-- /container -->
-		</div>
+</div>
 <!-- /SECTION -->
 
 <!-- Section -->

@@ -9,6 +9,7 @@ const database = require('./database/index');
 const Product = require('./models/product');
 const Category = require('./models/category');
 const app = express();
+var bodyParser = require('body-parser');
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main',
@@ -21,6 +22,9 @@ app.engine('hbs', exphbs({
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+// body parser
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 app.use(logger('dev'));
 app.use(express.json());

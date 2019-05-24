@@ -5,7 +5,6 @@ let category = dbs.category;
 exports.index = (req, res) => {
     product.find().exec((err, listProduct) => {
         if(err) item.push(err);
-        console.log('listProduct', listProduct);
 
     category.find().exec((err, listCategory) => {
         if(err) item.push(err);
