@@ -1,9 +1,14 @@
 
 let dbs = require('../database/index');
-const mongoose = require('mongoose');
 
 let Product = dbs.product;
 let category = dbs.category;
+
+let listCategory;
+category.find().exec((err, list) => {
+    if(err) item.push(err);
+    listCategory = list;
+});
 
 exports.detail = (req, res) => {
     Product.findById(req.params.id)
@@ -15,7 +20,7 @@ exports.detail = (req, res) => {
         console.log('image', product.image);
         console.log('price', product.price);
 
-        res.render('product/detail', {product})
+        res.render('product/detail', {product, listCategory})
     })
     .catch((err) => {
         console.log(err);

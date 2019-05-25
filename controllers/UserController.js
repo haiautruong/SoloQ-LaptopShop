@@ -1,20 +1,24 @@
-class UserControler {
-    login(req, res) {
-        res.render("user/login");
-    }
+const dbs = require('../database/index');
+let category = dbs.category;
 
-    forget(req, res) {
-        res.render("user/forgetPass");
-    }
+let listCategory;
+category.find().exec((err, list) => {
+    if(err) item.push(err);
+    listCategory = list;
+});
 
-    signup(req, res) {
-        res.render("user/signup");
-    }
-
-    update(req, res) {
-        res.render("user/updateInfo");
-    }
-
+exports.login = (req, res) => {
+        res.render("user/login", {listCategory});
 }
 
-module.exports = UserControler;
+exports.forget = (req, res) => {
+        res.render("user/forgetPass", {listCategory});
+}
+
+exports.signup = (req, res) => {
+        res.render("user/signup", {listCategory});
+}
+
+exports.update = (req, res) => {
+        res.render("user/updateInfo", {listCategory});
+}

@@ -5,8 +5,7 @@ var router = express.Router();
  * Routing for User
  */
 
-const UserController = require("../controllers/UserController");
-const controller = new UserController();
+const controller = require("../controllers/UserController");
 
 router.get("/login", (req,res) => controller.login(req,res));
 router.get("/signup", (req,res) => controller.signup(req,res));
