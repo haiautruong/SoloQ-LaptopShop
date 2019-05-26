@@ -11,6 +11,10 @@ exports.login = (req, res) => {
         res.render("user/login", {listCategory});
 }
 
+exports.postLogin = (req, res) => {
+        console.log('body', req.body);
+}
+
 exports.forget = (req, res) => {
         res.render("user/forgetPass", {listCategory});
 }

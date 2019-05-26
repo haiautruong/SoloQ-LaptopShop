@@ -14,6 +14,7 @@ mongoose.connect(
 
 const product = mongoose.model("product", productSchema);
 const category = mongoose.model("category", categorySchema);
+const  user = mongoose.model("user", categorySchema);
 
 module.exports = {
   product,
