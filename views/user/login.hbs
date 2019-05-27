@@ -1,27 +1,49 @@
 <div class="container margin-top-50">
     <div class="col-md-6 col-md-offset-3">
         <form action="/users/login" method="POST">
-         <div class="row myborder">
-             <h4 style="color: #05b56ba6; margin: initial; margin-bottom: 10px;">Đăng nhập</h4><hr>
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Tên đăng nhập" name="UserRegistration[username]" id="UserRegistration_username" type="text">                                                        
-            </div>
-            <div class="input-group margin-bottom-20">
-                <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="UserRegistration[password]" id="UserRegistration_password" type="password">                                    
-            </div>
-            
-            <div class="row">
-                <div class="col-sm-12 margin-bottom-20">
-                    <a href="/users/forget"><i class="text-italic pull-left">Quên mật khẩu</i></a>
-                    <a href="/users/signup"><i class="text-italic pull-right">Đăng ký</i></a>
+            <div class="row myborder">
+                <h4 style="color: #05b56ba6; margin: initial; margin-bottom: 10px;">Đăng nhập</h4>
+                 <label name="notyfy" class="text-danger" style="font-size: 14px">{{loginNotify}}</label>
+                <hr>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon">
+                            <i class="fa fa-user mycolor"></i>
+                        </span>
+                        <input
+                            size="60"
+                            maxlength="255"
+                            class="form-control"
+                            placeholder="Email đăng nhập"
+                            name="email"
+                            id="email"
+                            type="text"></div>
+                        <div class="input-group margin-bottom-20">
+                            <span class="input-group-addon">
+                                <i class="fa fa-lock mycolor"></i>
+                            </span>
+                            <input
+                                size="60"
+                                maxlength="255"
+                                class="form-control"
+                                placeholder="Mật khẩu"
+                                name="password"
+                                id="password"
+                                type="password"></div>
+
+                            <div class="row">
+                                <div class="col-sm-12 margin-bottom-20">
+                                    <a href="/users/forget">
+                                        <i class="text-italic pull-left">Quên mật khẩu</i>
+                                    </a>
+                                    <a href="/users/signup">
+                                        <i class="text-italic pull-right">Đăng ký</i>
+                                    </a>
+                                </div>
+                                <div class="col-md-12" style="text-align: center">
+                                    <button class="btn-u col-sm-12" type="submit">Đăng nhập</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-12" style="text-align: center">
-                    <button class="btn-u col-sm-12" type="submit">Đăng nhập</button>
-                </div>
-            </div>
-        </div>
-        </form>
-    </div>
 </div>
