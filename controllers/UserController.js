@@ -48,6 +48,7 @@ exports.login = (req, res) => {
                 req.session.phone = result[0].phone;
                 req.session.address = result[0].address;
                 req.session.password = result[0].password;
+                req.session.email = result[0].email;
 
                 console.log('userId', req.session.userId);
                 res.redirect('/');
@@ -70,5 +71,6 @@ exports.signup = (req, res) => {
 }
 
 exports.update = (req, res) => {
-        res.render("user/updateInfo", {listCategory});
+    let userSession = req.session;
+    res.render("user/updateInfo", {listCategory, userSession});
 }
