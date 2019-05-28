@@ -1,3 +1,5 @@
+'use strict';
+
 const mongoose = require('mongoose');
 const categorySchema = require("../models/category");
 const productSchema = require("../models/product");

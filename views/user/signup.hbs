@@ -1,30 +1,45 @@
 <div class="container margin-top-50">
     <div class="col-md-6 col-md-offset-3">
          <div class="row myborder">
+             <form action="/signup" method="POST">
              <h4 style="color: #05b56ba6; margin: initial; margin-bottom: 10px;">Đăng ký</h4><hr>
+            <label style="font-style:italic;  font-weight: 500; color: #048625d2">Email</label>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Tên đăng nhập" name="UserRegistration[username]" id="UserRegistration_username" type="text">                                                        
+                <input size="60" maxlength="255" class="form-control" placeholder="example@gamil.com" name="email" id="email" type="email" required>                                                        
             </div>
+            <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu</label>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="UserRegistration[password]" id="UserRegistration_password" type="password">                                    
+                <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password" id="password" type="password" required>                                    
             </div>
+            <label style="font-style:italic;  font-weight: 500; color: #048625d2">Xác nhận mật khẩu</label>
+            <div class="input-group margin-bottom-20">
+                <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                <input size="60" maxlength="255" class="form-control" placeholder="Xác nhận mật khẩu" name="confirm_password" id="confirm_password" type="password" required>                                    
+            </div>
+            <label style="font-style:italic;  font-weight: 500; color: #048625d2">Họ và tên</label>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Họ và tên" name="UserRegistration[fname]" id="UserRegistration_fname" type="text">                                    </div>
+                <input size="60" maxlength="255" class="form-control" placeholder="Họ và tên" name="name" id="name" type="text" required>                                    
+            </div>
+            <label style="font-style:italic;  font-weight: 500; color: #048625d2">Địa chỉ</label>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-envelope mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Địa chỉ" name="UserRegsistration[address]" id="UserRegistration_address" type="text">                                    </div>
+                <input size="60" maxlength="255" class="form-control" placeholder="Địa chỉ" name="address" id="address" type="text" required>      
+            </div>
+            <label style="font-style:italic;  font-weight: 500; color: #048625d2">Số điện thoại</label>
             <div class="input-group margin-bottom-20">
                 <span class="input-group-addon"><i class="fa fa-phone mycolor"></i></span>
-                <input size="60" maxlength="255" class="form-control" placeholder="Số điện thoại" name="UserRegistration[contactnumber]" id="UserRegistration_contactnumber" type="text">                                    </div>
-            
+                <input size="60" maxlength="255" class="form-control" placeholder="Số điện thoại" name="phone" id="phone" type="text" required>        
+            </div>
+
             <div class="row">
                 <div class="col-md-12" style="text-align: center">
                     <button class="btn-u col-sm-12" type="submit">Đăng ký</button>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
