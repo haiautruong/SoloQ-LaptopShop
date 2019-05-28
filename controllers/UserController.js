@@ -34,17 +34,21 @@ exports.login = (req, res) => {
 
     user.find()
         .where('email').equals(email)
-        .select('password')
         .exec((err, result) => {
             if(err || result.length == 0){
                 res.render('user/login', {loginNotify: 'Tên đăng nhập hoặc mật khẩu sai'});
                 return;
             }
 
-            console.log(result[0]);
+            console.log(result[0].address);
             console.log(result[0].password);
             if(password == result[0].password){
                 req.session.userId = result[0]._id;
+                req.session.username = result[0].name;
+                req.session.phone = result[0].phone;
+                req.session.address = result[0].address;
+                req.session.password = result[0].password;
+
                 console.log('userId', req.session.userId);
                 res.redirect('/');
                 return;
