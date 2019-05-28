@@ -21,17 +21,10 @@ product.find()
 
 exports.index = (req, res) => {
     if(req.session.userId){
-        user.findById(req.session.userId)
-            .exec((err, person) => {
-                if (err) {
-                    username = null;
-                } else {
-                let username = person.name.split(" ");
-                    console.log('name', username);
-                    username = username[0] + " " + username[username.length - 1];
-                    res.render('index', {listProduct, listCategory, username})
-                }
-            });
+        let userSession = req.session;
+        console.log('userSession',userSession);
+        console.log('username', userSession.username);
+        res.render('index', {listProduct, listCategory, userSession})
     }else{
         res.render('index', {listProduct, listCategory})
     }  
@@ -52,31 +45,3 @@ exports.index = (req, res) => {
 
 
 
-
-
-
-
-
-
-
-
-// class HomeControllers{
-//     index(req,res){
-//         let product = res.app.productModel;
-//         let category = res.app.categoryModel;
-//         let vm = null;
-
-//         let allProducts = product.getAllProduct();
-//         let allCategories = category.getAllCategories();
-
-//         Promise.all([allProducts, allCategories]).then(([listPro, listCate]) => {
-//             vm = {
-//                 listAllProducts: listPro,
-//                 listAllCategories: listCate
-//             }
-
-//             res.render("index", vm);
-//         });
-//     }
-// }
-// module.exports = HomeControllers;
