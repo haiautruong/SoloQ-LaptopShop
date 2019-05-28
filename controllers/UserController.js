@@ -44,6 +44,8 @@ exports.login = (req, res) => {
             console.log(result[0]);
             console.log(result[0].password);
             if(password == result[0].password){
+                req.session.userId = result[0]._id;
+                console.log('userId', req.session.userId);
                 res.redirect('/');
                 return;
             }
