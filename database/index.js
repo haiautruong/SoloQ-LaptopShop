@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const categorySchema = require("../models/category");
 const productSchema = require("../models/product");
-const userSchema = require("../models/user");
+const user = require("../models/user");
 
 const url = "mongodb+srv://admin0:1234567890@webshop-xftef.mongodb.net/laptop-shop";
 //const url = "mongodb://127.0.0.1:27017/laptop-shop";
@@ -18,7 +18,6 @@ mongoose.connect(
 
 const product = mongoose.model("product", productSchema);
 const category = mongoose.model("category", categorySchema);
-const  user = mongoose.model("user", userSchema);
 
 module.exports = {
   product,
