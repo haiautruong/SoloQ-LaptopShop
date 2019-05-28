@@ -1,5 +1,6 @@
 const dbs = require('../database/index');
 let category = dbs.category;
+let user = dbs.user;
 
 let listCategory;
 category.find().exec((err, list) => {
@@ -8,7 +9,19 @@ category.find().exec((err, list) => {
 });
 
 exports.indexLogin = (req, res) => {
-        res.render("user/login", {listCategory});
+    user.findById(req.session.userId)
+    .exec((error, user) => {
+        if(error){
+            return next(error);
+        }else {
+            if(user === null){
+                res.render("user/login", {listCategory});
+            } else{
+                console.log('logined', req.session);
+                return res.redirect('/');
+            }
+        }
+    })   
 }
 
 exports.login = (req, res) => {
