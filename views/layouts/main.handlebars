@@ -54,16 +54,19 @@
                         </li>
                     </ul>
                     <ul class="header-links pull-right">
+                        {{#if username}}
+                        <li>
+                            <a href="/users/update">
+                                <i class="fa fa-user-o"></i>
+                                Xin chào, {{username}}</a>
+                        </li>
+                        {{else}}
                         <li> 
                             <a href="/users/login">
                                 <i class="fa fa-sign-in" aria-hidden="true"></i>
                                 Đăng nhập</a>
                         </li>
-                        <li>
-                            <a href="/users/update">
-                                <i class="fa fa-user-o"></i>
-                                Tài khoản của tôi</a>
-                        </li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>
