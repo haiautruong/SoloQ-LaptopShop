@@ -13,5 +13,7 @@ router.post("/signup", (req,res ,next) => controller.signup(req,res, next));
 router.get("/update", (req,res) => controller.update(req,res));
 router.get("/forget", (req,res) => controller.forget(req,res));
 router.post("/login", (req, res) => controller.login(req, res));
+router.get("/cart", (req,res) => controller.cart(req,res));
+
 
 module.exports = router;

@@ -108,3 +108,9 @@ exports.update = (req, res) => {
     let userSession = req.session;
     res.render("user/updateInfo", {listCategory, userSession});
 }
+
+exports.cart = (req, res) => {
+    let userSession = req.session;
+    console.log('cart');
+    res.render('user/cart', {listCategory, userSession})
+}
