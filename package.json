@@ -6,6 +6,8 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
@@ -17,6 +19,8 @@
     "jquery-zoom": "^1.7.21",
     "mongodb": "^3.2.4",
     "mongoose": "^5.5.8",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }

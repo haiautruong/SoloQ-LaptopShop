@@ -9,10 +9,10 @@ const url = "mongodb+srv://admin0:1234567890@webshop-xftef.mongodb.net/laptop-sh
 //const url = "mongodb://127.0.0.1:27017/laptop-shop";
 
 mongoose.connect(
-  url, 
-  { 
-      useNewUrlParser: true
-   }
+  url,
+  {
+    useNewUrlParser: true
+  }
 );
 
 mongoose.set('useCreateIndex', true);

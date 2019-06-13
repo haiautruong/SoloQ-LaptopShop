@@ -3,7 +3,7 @@ const CategorySchema = require('../models/category');
 
 let Category = mongoose.model('category', CategorySchema)
 
-productSchema =  mongoose.Schema(
+productSchema = mongoose.Schema(
     {
         name: String,
         price: Number,
@@ -12,6 +12,10 @@ productSchema =  mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'category'
         }
+    },
+    {
+        timestamps: true,
+        versionKey: false
     }
 )
 
