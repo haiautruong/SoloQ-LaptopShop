@@ -30,5 +30,5 @@ exports.detail = (req, res) => {
 exports.store = (req, res) =>{
     const shopId = req.params.idCategory;
     console.log('idCategory', shopId)
-    //res.render('product/game', {listCategory})
+    res.render('product/store', {listCategory})
 }
