@@ -10,7 +10,7 @@ const controller = require("../controllers/UserController");
 router.get("/login", (req, res) => controller.indexLogin(req, res));
 router.get("/signup", (req, res, next) => controller.indexSignup(req, res));
 
-router.get("/update", (req, res) => controller.update(req, res));
+// router.get("/update", (req, res) => controller.update(req, res));
 router.get("/forget", (req, res) => controller.indexForget(req, res));
 router.post("/forget", (req, res) => controller.forget(req, res));
 
@@ -27,5 +27,11 @@ router.post("/signup", passport.authenticate('signup', {
     failureRedirect: '/users/signup',
     failureFlash: true
 }));
+
+router.get("/cart", (req,res) => controller.cart(req,res));
+
+router.get("/account", (req,res) => controller.account(req,res));
+
+router.get("/history", (req,res) => controller.history(req,res));
 
 module.exports = router;

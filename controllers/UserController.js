@@ -144,13 +144,29 @@ exports.signup = (req, res) => {
     }
 }
 
-exports.update = (req, res) => {
-    let userSession = req.session;
-    res.render("user/updateInfo", { listCategory, userSession });
-}
+// exports.update = (req, res) => {
+//     let userSession = req.user;
+//     res.render("user/updateInfo", { listCategory, userSession });
+// }
 
 exports.cart = (req, res) => {
-    let userSession = req.session;
+    let userSession = req.user;
     console.log('cart');
-    res.render('user/cart', { listCategory, userSession })
+    res.render('user/cart', { listCategory, userSession });
+}
+
+exports.history = (req, res) => {
+    let userSession = req.user;
+    res.render('user/history', { listCategory, userSession });
+}
+
+exports.account = (req, res) => {
+    if(req.isAuthenticated()){
+        let userSession = req.user;
+        res.render('user/account', {listCategory, userSession});
+    }
+    else{
+        res.redirect('/');
+    }
+    
 }
