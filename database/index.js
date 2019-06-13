@@ -15,6 +15,7 @@ mongoose.connect(
    }
 );
 
+mongoose.set('useCreateIndex', true);
 
 const product = mongoose.model("product", productSchema);
 const category = mongoose.model("category", categorySchema);

@@ -26,8 +26,8 @@ exports.index = (req, res) => {
         console.log('username', userSession.username);
         res.render('index', {listProduct, listCategory, userSession})
     }else{
-        res.render('index', {listProduct, listCategory})
-    }  
+        res.render('layouts/index', {listProduct, listCategory})
+    }
 }
 
 

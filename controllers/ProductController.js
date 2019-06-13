@@ -26,3 +26,9 @@ exports.detail = (req, res) => {
         console.log(err);
     });
 }
+
+exports.store = (req, res) =>{
+    const shopId = req.params.idCategory;
+    console.log('idCategory', shopId)
+    //res.render('product/game', {listCategory})
+}
