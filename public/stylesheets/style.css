@@ -2689,13 +2689,6 @@ textarea.input {
       left: 180px;
       opacity: .3; }
 
-body {
-  line-height: 24px;
-  font-size: 14px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 400;
-  color: #777777;
-  background: #fff; }
 
 html,
 body {
@@ -8365,3 +8358,36 @@ label {
     color: #09a545; }
 
 /*# sourceMappingURL=main.css.map */
+
+/*navbar-account*/
+
+.nav-ver{
+  color: white
+}
+
+.nav-ver>ul>li{
+  background-color: #009e4c;
+  font-size: 16px;
+  text-align: center;
+  min-height: 40px;
+  padding: 5px;
+  font-weight: 100
+}
+.nav-ver>ul>li>a{
+  display: block;
+  color: #009e4c;
+  min-height: 40px;
+  background-color: white;
+  padding: 11px
+}
+
+.nav-ver>ul>li>a:hover{
+  background-color: #07af58;
+  cursor: pointer;
+  color: white;
+}
+
+.selected-a{
+  background-color: #07af3f;
+  color: white;
+}
