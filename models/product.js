@@ -8,7 +8,7 @@ productSchema = mongoose.Schema(
         name: String,
         price: Number,
         image: String,
-        category: {
+        categoryCode: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'category'
         }

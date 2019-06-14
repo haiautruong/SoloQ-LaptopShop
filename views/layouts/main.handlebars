@@ -114,15 +114,15 @@
                     <div class="col-md-3 clearfix">
                         <div class="header-ctn">
                             <!-- Cart -->
-                            <div class="dropdown">
+                            <div class="dropdown" id="cart" onclick="handleCart(this.id)">
                                 <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Giỏ hàng</span>
-                                    <div class="qty">3</div>
+                                    <div class="qty" id="qtyCart">0</div>
                                 </a>
                                 <div class="cart-dropdown">
-                                    <div class="cart-list">
-                                        <div class="product-widget">
+                                    <div class="cart-list" id="list_product">
+                                        {{!-- <div class="product-widget">
                                             <div class="product-img">
                                                 <img src="/images/product01.png" alt="">
                                             </div>
@@ -136,7 +136,7 @@
                                             <button class="delete">
                                                 <i class="fa fa-close"></i>
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <div class="cart-summary">
                                         <small>3 Item(s) selected</small>
@@ -337,7 +337,7 @@
     <script src="/javascripts/nouislider.min.js"></script>
     <script src="/javascripts/jquery.zoom.min.js"></script>
     <script src="/javascripts/main.js"></script>
-    <script src="/javascripts/style.js"></script>
+    <script src="/javascripts/function.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
