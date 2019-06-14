@@ -8388,6 +8388,6 @@ label {
 }
 
 .selected-a{
-  background-color: #07af3f;
-  color: white;
+  background-color: #07af3f !important;
+  color: white !important;
 }

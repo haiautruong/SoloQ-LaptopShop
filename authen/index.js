@@ -8,6 +8,7 @@ const serializeUser = (user, done) => {
 
 const deserializeUser = (id, done) => {
     User.findById(id, (err, user) => {
+        console.log(user);
         done(err, user);
     });
 }
@@ -21,31 +22,43 @@ const signupStrategy = new LocalStrategy({
     const username = req.body.username;
     const phone = req.body.phone;
     const address = req.body.address;
+    const cmnd = req.body.cmnd;
 
 
-    if (email && password && confirmPassword && username && phone && address) {
-        if (password != confirmPassword) {
-            return done(null, false, req.flash('message', 'Mật khẩu không trùng khớp!'));
+    if (email && password && confirmPassword && username && phone && address && cmnd) {
+        let data = {
+            email,
+            password,
+            confirmPassword,
+            username,
+            phone,
+            address,
+            cmnd
         }
 
+        if (password != confirmPassword) {
+            return done(null, false, req.flash('message', 'pass'), req.flash('data', data));
+        }
+        
         User.findOne({ 'email': email }, (err, user) => {
             if (user) {
-                return done(null, false, req.flash('message', 'Tài khoản đã tồn tại!'));
+                return done(null, false, req.flash('message', 'email'), req.flash('data', data));
             }
-
+            
             const newUser = new User({
                 email: email,
                 password: password,
                 name: username,
                 phone: phone,
-                address: address
+                address: address,
+                cmnd: cmnd
             });
 
             console.log(newUser);
             newUser.save(err => {
                 if (err) {
                     console.log('err', err);
-                    return done(null, false, req.flash('message', 'Đã xảy ra lỗi, vui lòng kiểm tra lại!'));
+                    return done(null, false, req.flash('message', 'save'));
                 } else {
                     return done(null, newUser);
                 }
@@ -53,7 +66,7 @@ const signupStrategy = new LocalStrategy({
         });
 
     } else {
-        return done(null, false, req.flash('message', 'Vui lòng kiểm tra lại!'));
+        return done(null, false, req.flash('message', 'disfull'));
     }
 });
 

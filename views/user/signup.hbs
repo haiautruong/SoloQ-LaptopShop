@@ -4,41 +4,54 @@
             <form action="/users/signup" method="POST">
                 <h4 style="color: #05b56ba6; margin: initial; margin-bottom: 10px;">Đăng ký</h4>
                 <hr>
-                <label style="font-style:italic;  font-weight: 500; color: #048625d2">Email</label>
-                <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
-                    <input size="60" maxlength="255" class="form-control" placeholder="example@gamil.com" name="email"
-                        id="email" type="email" required>
+                <div>
+                    <label class="col-6" style="font-style:italic;  font-weight: 500; color: #048625d2">Email</label>
+                    <span class="pull-right" style="text-align: right; color: red"><i>{{notify.email}}</i></span>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="example@gmail.com"
+                            name="email" id="email" type="email" required value="{{data.email}}">
+                    </div>
                 </div>
-                <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu</label>
-                <div class="input-group margin-bottom-20">
-                    <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
-                    <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password"
-                        id="password" type="password" required>
+                <div>
+                    <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu</label>
+                    <span class="pull-right" style="text-align: right; color: red"><i>{{notify.pass}}</i></span>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password"
+                            id="password" type="password" required value="{{data.password}}">
+                    </div>
+
                 </div>
                 <label style="font-style:italic;  font-weight: 500; color: #048625d2">Xác nhận mật khẩu</label>
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
                     <input size="60" maxlength="255" class="form-control" placeholder="Xác nhận mật khẩu"
-                        name="confirm_password" id="confirm_password" type="password" required>
+                        name="confirm_password" id="confirm_password" type="password" required value={{data.confirmPassword}}>
                 </div>
                 <label style="font-style:italic;  font-weight: 500; color: #048625d2">Họ và tên</label>
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
                     <input size="60" maxlength="255" class="form-control" placeholder="Họ và tên" name="username"
-                        id="username" type="text" required>
+                        id="username" type="text" required value="{{data.username}}">
                 </div>
                 <label style="font-style:italic;  font-weight: 500; color: #048625d2">Địa chỉ</label>
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="fa fa-envelope mycolor"></i></span>
                     <input size="60" maxlength="255" class="form-control" placeholder="Địa chỉ" name="address"
-                        id="address" type="text" required>
+                        id="address" type="text" required value="{{data.address}}">
+                </div>
+                <label style="font-style:italic;  font-weight: 500; color: #048625d2">CMND</label>
+                <div class="input-group margin-bottom-20">
+                    <span class="input-group-addon"><i class="fa fa-user mycolor"></i></span>
+                    <input size="60" maxlength="255" class="form-control" placeholder="CMND"
+                        id="cmnd" name="cmnd" type="text" required value="{{data.cmnd}}">
                 </div>
                 <label style="font-style:italic;  font-weight: 500; color: #048625d2">Số điện thoại</label>
                 <div class="input-group margin-bottom-20">
                     <span class="input-group-addon"><i class="fa fa-phone mycolor"></i></span>
                     <input size="60" maxlength="255" class="form-control" placeholder="Số điện thoại" name="phone"
-                        id="phone" type="text" required>
+                        id="phone" type="text" required value="{{data.phone}}">
                 </div>
 
                 <div class="row">

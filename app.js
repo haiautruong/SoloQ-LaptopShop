@@ -50,6 +50,9 @@ passport.deserializeUser(authen.deserializeUser);
 passport.use('login', authen.loginStrategy);
 passport.use('signup', authen.signupStrategy);
 
+const apiRouter = require('./routes/api');
+app.use('/api', apiRouter);
+
 const productRouter = require('./routes/product');
 app.use('/product', productRouter);
 

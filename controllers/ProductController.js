@@ -2,12 +2,20 @@
 let dbs = require('../database/index');
 
 let Product = dbs.product;
-let category = dbs.category;
+let Category = dbs.category;
+let Brand = dbs.brand;
+
 
 let listCategory;
-category.find().exec((err, list) => {
+Category.find().exec((err, list) => {
     if (err) item.push(err);
     listCategory = list;
+});
+
+let listBrand;
+Brand.find().exec((err, list) => {
+    if (err) item.push(err);
+    listBrand = list;
 });
 
 exports.detail = (req, res) => {
@@ -29,6 +37,18 @@ exports.detail = (req, res) => {
 
 exports.store = (req, res) => {
     const shopId = req.params.idCategory;
-    console.log('idCategory', shopId)
-    res.render('product/store', { listCategory })
+    Product.find({categoryCode: shopId})
+    .populate('categoryCode')
+    .exec((err, shopItems) => {
+        if(err){
+            console.log('err shop', err);
+        }else{
+            res.render('product/store', { listCategory, listBrand, shopItems })
+        }
+    });
+    
+}
+
+exports.search = (req, res) => {
+    res.render('product/search', { listCategory, listBrand })
 }

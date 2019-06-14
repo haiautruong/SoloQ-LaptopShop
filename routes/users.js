@@ -33,5 +33,8 @@ router.get("/cart", (req,res) => controller.cart(req,res));
 router.get("/account", (req,res) => controller.account(req,res));
 
 router.get("/history", (req,res) => controller.history(req,res));
+router.get("/change-pass", (req,res) => controller.change(req,res));
+router.post("/change-pass", (req,res) => controller.saveChange(req,res));
+
 
 module.exports = router;
