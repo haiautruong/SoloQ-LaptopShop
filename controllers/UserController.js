@@ -35,51 +35,15 @@ category.find().exec((err, list) => {
 // }
 
 exports.indexLogin = (req, res) => {
-    console.log("call hereeee");
+    console.log("call hereee");
+
     if (req.isAuthenticated()) {
         return res.redirect('/');
     } else {
-        console.log(req.flash('message'));
-        res.render("user/login", { listCategory });
+        let mess = req.flash('message')[0];
+        console.log('mess', mess);
+        res.render("user/login", { listCategory, loginNotify: mess});
     }
-}
-
-exports.login = (req, res) => {
-    const user = dbs.user;
-    const email = req.body.email;
-    const password = req.body.password;
-
-    console.log('email', email);
-    console.log('pass', password);
-
-    user.find()
-        .where('email').equals(email)
-        .exec((err, result) => {
-            if (err || result.length == 0) {
-                res.render('user/login', { loginNotify: 'Tên đăng nhập hoặc mật khẩu sai' });
-                return;
-            }
-
-            console.log(result[0].address);
-            console.log(result[0].password);
-            if (password == result[0].password) {
-                req.session.userId = result[0]._id;
-                req.session.username = result[0].name;
-                req.session.phone = result[0].phone;
-                req.session.address = result[0].address;
-                req.session.password = result[0].password;
-                req.session.email = result[0].email;
-
-                console.log('userId', req.session.userId);
-                res.redirect('/');
-                return;
-            }
-            else {
-                res.render('user/login', { loginNotify: 'Tên đăng nhập hoặc mật khẩu sai' });
-                return;
-            }
-
-        })
 }
 
 exports.indexForget = (req, res) => {
@@ -107,47 +71,34 @@ exports.forget = (req, res) => {
 }
 
 exports.indexSignup = (req, res) => {
-    res.render("user/signup", { listCategory });
-}
+    if (!req.isAuthenticated()) {
+        
+        let mess = req.flash('message')[0];
+        let data = req.flash('data')[0];
 
-exports.signup = (req, res) => {
-    // confirm that user typed same password twice
-    if (req.body.password != req.body.confirm_password) {
-        console.log('not match');
-    }
+        let notify = {
+            pass: null,
+            email: null,
+            save: null
+        };
 
-    if (req.body.email && req.body.username && req.body.password &&
-        req.body.confirm_password && req.body.phone && req.body.address) {
-        var userData = new user({
-            email: req.body.email,
-            password: req.body.password,
-            name: req.body.username,
-            phone: req.body.phone,
-            address: req.body.address
-        })
-
-        userData.save(err => {
-            if (err) {
-                console.log('err', err);
-                res.status(500).send(err);
-            } else {
-                req.session.userId = userData._id;
-                req.session.username = userData.name;
-                req.session.password = userData.password;
-                req.session.phone = userData.phone;
-                req.session.address = userData.address;
-                req.session.email = userData.email;
-
-                res.redirect('/');
-            }
-        });
+        if(mess === 'pass'){
+            notify.pass = 'Mật khẩu không trùng khớp'
+        }
+        else if(mess === 'email'){
+            notify.email = 'Email đã tồn tại'
+        }
+        else if(mess === 'save' || mess == 'disfull'){
+            notify.save = 'Có lỗi xảy ra @@! Xin thử lại'
+        }
+        console.log('notify', notify);
+        console.log('mess', mess);
+        return res.render('user/signup', {listCategory, notify, data});
+    } else {
+        req.redirect('/')
+        
     }
 }
-
-// exports.update = (req, res) => {
-//     let userSession = req.user;
-//     res.render("user/updateInfo", { listCategory, userSession });
-// }
 
 exports.cart = (req, res) => {
     let userSession = req.user;
@@ -169,4 +120,21 @@ exports.account = (req, res) => {
         res.redirect('/');
     }
     
+}
+
+exports.change = (req, res) => {
+    if(req.isAuthenticated()){
+        let userSession = req.user;
+        res.render('user/changePass', { listCategory, userSession });
+    }
+    else{
+        res.redirect('/users/login');
+    }
+}
+
+exports.saveChange = (req, res) => {
+    if(req.isAuthenticated()){
+        let userSession = req.user;
+        if(req.body.password == userSession.password){}
+    }
 }

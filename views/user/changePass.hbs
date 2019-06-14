@@ -1,0 +1,48 @@
+<div class="container margin-top-50">
+    <div class="row">
+        <div class="col-sm-4 col-md-3">
+            <!-- account tab nav -->
+            <div class="nav-ver">
+                <ul>
+                    <li><a href="/users/account">Thông tin cá nhân</a></li>
+                    <li><a href="/users/history">Lịch sử giao hàng</a></li>
+                    <li><a class="selected-a" href="/users/change-pass">Đổi mật khẩu</a></li>
+                </ul>
+            </div>
+            <!-- /account tab nav -->
+        </div>
+
+        <div class="col-sm-8 col-md-8 col-md-offset-1">
+            <div class="row myborder">
+                <form method="post" action="/users/change-pass">
+                    <h4 style="color: #05b56ba6; margin-bottom: 10px;">Đổi mật khẩu</h4>
+                    <hr>
+                    <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu hiện tại</label>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password"
+                            name="password_cur" type="password" required>
+                    </div>
+                    <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu mới</label>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password"
+                            name="password_new" type="password" required>
+                    </div>
+                    <label style="font-style:italic;  font-weight: 500; color: #048625d2">Xác nhận mật khẩu</label>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Xác nhận mật khẩu"
+                            name="password_renew" id="confirm_password" type="password" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: center">
+                            <button class="btn-u" type="submit">Lưu mật khẩu</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
