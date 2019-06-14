@@ -37,8 +37,16 @@ exports.detail = (req, res) => {
 
 exports.store = (req, res) => {
     const shopId = req.params.idCategory;
-    console.log('idCategory', shopId)
-    res.render('product/store', { listCategory, listBrand })
+    Product.find({categoryCode: shopId})
+    .populate('categoryCode')
+    .exec((err, shopItems) => {
+        if(err){
+            console.log('err shop', err);
+        }else{
+            res.render('product/store', { listCategory, listBrand, shopItems })
+        }
+    });
+    
 }
 
 exports.search = (req, res) => {
