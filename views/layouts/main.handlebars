@@ -96,14 +96,15 @@
                     <!-- SEARCH BAR -->
                     <div class="col-md-6">
                         <div class="header-search">
-                            <form>
+                            <form action="/product/search" method="POST">
                                 <select class="input-select">
                                     <option value="0">Danh mục</option>
-                                    <option value="1">Laptop 1</option>
-                                    <option value="1">Laptop 2</option>
+                                    {{#each listCategory}}
+                                    <option value="1">{{this.name}}</option>
+                                    {{/each}}
                                 </select>
                                 <input class="input" placeholder="Tìm kiếm...">
-                                <button class="search-btn"><i class="fa fa-search"></i></button>
+                                <button class="search-btn" type="submit"><i class="fa fa-search"></i></button>
                             </form>
                         </div>
                     </div>
@@ -255,13 +256,11 @@
                     <div class="col-md-3 col-xs-6">
                         <div class="footer">
                             <h3 class="footer-title">Danh mục</h3>
+                            {{#each listCategory}}
                             <ul class="footer-links">
-                                <li><a href="#">Bán chạy</a></li>
-                                <li><a href="#">Laptops</a></li>
-                                <li><a href="#">Smartphones</a></li>
-                                <li><a href="#">Cameras</a></li>
-                                <li><a href="#">Accessories</a></li>
+                                <li><a href="#">{{this.name}}</a></li>
                             </ul>
+                            {{/each}}
                         </div>
                     </div>
 
