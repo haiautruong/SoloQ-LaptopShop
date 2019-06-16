@@ -1,4 +1,4 @@
-var isSupportLocalStorge = typeof(Storage)
+var isSupportLocalStorge = typeof (Storage)
     ? true
     : false;
 let qtyCart = 0;
@@ -47,7 +47,7 @@ function handleCart(id) {
         : [];
 
     let test = localStorage.getItem("listItemCart");
-    console.log(typeof(test));
+    console.log(typeof (test));
     console.log(currentList);
 
     let myRes;
@@ -91,3 +91,63 @@ function handleCart(id) {
     });
 
 }
+
+let categoryCode = function test(id) {
+
+    console.log("AbC", id);
+
+    return id;
+}
+
+$(document).ready(function () {
+    let idCategory = window.location.pathname.split('/')[2];
+    // console.log(idCategory);
+    // console.log(window.location.pathname);
+    // var test = $('#test').find('.magic').attr('id');
+    // console.log(test);
+
+
+    $('#pagination-store').pagination({
+        dataSource: `http://localhost:3000/api/store-pagination/${idCategory}`,
+        locator: 'products',
+        totalNumberLocator: function (response) {
+            return response.total;
+        },
+        pageSize: 3,
+        ajax: {
+            beforeSend: function () {
+                $('#store-products').html('Loading data ...');
+            }
+        },
+        callback: function (data, pagination) {
+            console.log(data);
+            console.log("pagination", pagination);
+            let pageContent = data;
+            let html = "";
+            pageContent.forEach(elm => {
+                console.log("paging-product: ", elm);
+                html += `
+                <div class="col-md-4 col-xs-6">
+                    <div class="product">
+                        <div class="product-img">
+                            <img style="height: 200px" src="/images/${elm.image}" alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">${elm.categoryCode.name}</p>
+                            <h3 class="product-name"><a href="#">${elm.name}</a></h3>
+                            <h4 class="product-price">${elm.price}</h4>
+                            <div class="product-btns">
+                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">xem ngay</span></button>
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> thêm vào
+                                giỏ</button>
+                        </div>
+                    </div>
+                </div>`;
+            })
+            $('#store-products').html(html);
+        }
+    })
+})

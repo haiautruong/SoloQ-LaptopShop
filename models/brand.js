@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const brand = new mongoose.Schema(
+const brandSchema = new mongoose.Schema(
     {
         name: String
     },
@@ -10,4 +10,8 @@ const brand = new mongoose.Schema(
     }
 )
 
-module.exports = brand;
+
+
+const Brand = mongoose.model('brand', brandSchema);
+
+module.exports = Brand;

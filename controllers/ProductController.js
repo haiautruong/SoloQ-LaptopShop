@@ -43,7 +43,7 @@ exports.store = (req, res) => {
         if(err){
             console.log('err shop', err);
         }else{
-            res.render('product/store', { listCategory, listBrand, shopItems })
+            res.render('product/store', { listCategory, listBrand, shopItems, shopId })
         }
     });
     
