@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 let category = dbs.category;
 let User = dbs.user;
 let Brand = dbs.brand;
+let Transaction = dbs.transaction;
 
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
@@ -118,7 +119,37 @@ exports.checkout = (req, res) => {
 //post
 exports.placeOrder = (req, res) => {
     console.log("body", req.body);
-    res.redirect('/users/history');
+    console.log(req.user);
+    let result = JSON.parse(req.body.listProductPay);
+    console.log("result", result);
+
+
+    const idUser = req.user._id;
+    const listProducts = result.listProducts;
+    const total = result.total;
+    const status = -1;
+    const address = req.body.address;
+    const phone = req.body.phone;
+
+    const transaction = new Transaction({
+        idUser,
+        listProducts,
+        total,
+        status,
+        phone,
+        address
+    });
+
+    console.log("Transaction", transaction);
+    console.log("listTrans", transaction.listProducts);
+    transaction.save((err) => {
+        if(err){
+            console.log("err save transaction: ", err);
+        }
+        else{
+            res.redirect('/users/history');
+        }
+    })
 }
 
 exports.history = (req, res) => {

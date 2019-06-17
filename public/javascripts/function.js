@@ -341,6 +341,7 @@ $(document).ready(function () {
                                 </div>`;
                         let product = {
                             idProduct: elm.idCart,
+                            nameProduct: element.name,
                             quantity: elm.counter,
                             price: element.price 
 
