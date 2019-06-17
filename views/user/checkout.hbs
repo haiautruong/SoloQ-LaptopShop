@@ -1,0 +1,110 @@
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <form class="row" method="POST" action="/users/checkout">
+            <div class="col-md-7">
+                <!-- Billing Details -->
+                <div class="billing-details">
+                    <div class="section-title">
+                        <h3 class="title">Hóa đơn</h3>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" name="name" placeholder="Họ và tên" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="email" name="email" placeholder="Email" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" name="address" placeholder="Địa chỉ" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="tel" name="tel" placeholder="Số điện thoại" value="" readonly>
+                    </div>
+                </div>
+                <!-- /Billing Details -->
+
+                <!-- Shiping Details -->
+                <div class="shiping-details">
+                    <div class="section-title">
+                        <h3 class="title">Thêm địa chỉ</h3>
+                    </div>
+                    <div class="input-checkbox">
+                        <input type="checkbox" id="shiping-address">
+                        <label for="shiping-address">
+                            <span></span>
+                            Bạn muốn nhận đơn hàng ở một địa chỉ khác?
+                        </label>
+                        <div class="caption">
+                           <div class="form-group">
+                        <input class="input" type="text" name="nameOth" placeholder="Họ và tên" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="email" name="emailOth" placeholder="Email" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="text" name="addressOth" placeholder="Địa chỉ" value="" readonly>
+                    </div>
+                    <div class="form-group">
+                        <input class="input" type="tel" name="telOth" placeholder="Số điện thoại" value="" readonly>
+                    </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Shiping Details -->
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Đơn hàng</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>SẢN PHẨM</strong></div>
+                        <div><strong>TỔNG CỘNG</strong></div>
+                    </div>
+                    <div class="order-products">
+                        <div class="order-col">
+                            <div>1x Product Name Goes Here</div>
+                            <div>$980.00</div>
+                        </div>
+                        <div class="order-col">
+                            <div>2x Product Name Goes Here</div>
+                            <div>$980.00</div>
+                        </div>
+                    </div>
+                    <div class="order-col">
+                        <div>Phí vận chuyển</div>
+                        <div><strong>MIỄN PHÍ</strong></div>
+                    </div>
+                    <div class="order-col">
+                        <div><strong>TỔNG CỘNG</strong></div>
+                        <div><strong class="order-total">$2940.00</strong></div>
+                    </div>
+                </div>
+                <div class="payment-method">
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-1" checked>
+                        <label for="payment-1">
+                            <span></span>
+                            Thanh toán khi nhận hàng
+                        </label>
+                    </div>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        <span></span>
+                        Tôi đồng ý</a>
+                    </label>
+                </div>
+                <button type="submit" class="primary-btn order-submit form-control" style="padding-bottom: 50px">Đặt hàng</button>
+            </div>
+            <!-- /Order Details -->
+        </form>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->

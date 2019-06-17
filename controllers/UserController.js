@@ -112,6 +112,10 @@ exports.checkout = (req, res) => {
     }
 }
 
+exports.placeOrder = (req, res) => {
+    res.redirect('/users/history');
+}
+
 exports.history = (req, res) => {
     if (req.isAuthenticated()) {
         let userSession = req.user;

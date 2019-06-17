@@ -37,6 +37,8 @@ router.post("/signup", passport.authenticate('signup'), (req, res) => {
 
 router.get("/cart", (req,res) => controller.cart(req,res));
 router.get("/checkout", (req,res) => controller.checkout(req,res));
+router.post("/checkout", (req,res) => controller.placeOrder(req,res));
+
 
 router.get("/account", (req,res) => controller.account(req,res));
 router.get("/history", (req,res) => controller.history(req,res));
