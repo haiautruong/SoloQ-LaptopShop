@@ -31,11 +31,11 @@ productSchema = mongoose.Schema(
     }
 )
 
-productSchema.statics.getAllProduct = () => {
-    return Product.find()
-        .populate('categoryCode')
-        .populate('brandCode');
-}
+// productSchema.statics.getAllProduct = () => {
+//     return Product.find()
+//         .populate('categoryCode')
+//         .populate('brandCode');
+// }
 
 productSchema.statics.getProducts = (type, id) => {
 
