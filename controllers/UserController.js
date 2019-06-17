@@ -103,8 +103,11 @@ exports.cart = (req, res) => {
 
 exports.checkout = (req, res) => {
     if (req.isAuthenticated()) {
-        let userSession = req.user;
-        res.render('user/checkout', { listCategory, userSession });
+        Brand.getAllBrands().exec((err, listBrand) => {
+            let userSession = req.user;
+            console.log(userSession);
+            res.render('user/checkout', { listCategory, userSession, listBrand });
+        });
     }
     else {
         req.session.returnTo = '/users/checkout';
@@ -112,14 +115,24 @@ exports.checkout = (req, res) => {
     }
 }
 
+//post
 exports.placeOrder = (req, res) => {
+    console.log("body", req.body);
     res.redirect('/users/history');
 }
 
 exports.history = (req, res) => {
     if (req.isAuthenticated()) {
         let userSession = req.user;
-        res.render('user/history', { listCategory, userSession });
+        Brand.getAllBrands().exec((err, listBrand) => {
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.render('user/history', { listCategory, userSession, listBrand });
+
+            }
+        })
     }
     else {
         req.session.returnTo = '/users/history';
@@ -151,6 +164,7 @@ exports.change = (req, res) => {
         res.render('user/changePass', { listCategory, userSession, messRes});
     }
     else {
+        req.session.returnTo = '/users/change-pass';
         res.redirect('/users/login');
     }
 }

@@ -7,20 +7,22 @@
                 <!-- Billing Details -->
                 <div class="billing-details">
                     <div class="section-title">
-                        <h3 class="title">Hóa đơn</h3>
+                        <h3 class="title">Thông tin người người nhận</h3>
+                    </div>
+                    {{#with userSession}}
+                    <div class="form-group">
+                        <input class="input" type="text" name="name" placeholder="Họ và tên" value="{{name}}" readonly>
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="name" placeholder="Họ và tên" value="" readonly>
+                        <input class="input" type="email" name="email" placeholder="Email" value="{{email}}" readonly>
                     </div>
                     <div class="form-group">
-                        <input class="input" type="email" name="email" placeholder="Email" value="" readonly>
+                        <input class="input" type="text" name="address" placeholder="Địa chỉ" value="{{address}}" readonly>
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="address" placeholder="Địa chỉ" value="" readonly>
+                        <input class="input" type="tel" name="tel" placeholder="Số điện thoại" value="{{phone}}" readonly>
                     </div>
-                    <div class="form-group">
-                        <input class="input" type="tel" name="tel" placeholder="Số điện thoại" value="" readonly>
-                    </div>
+                    {{/with}}
                 </div>
                 <!-- /Billing Details -->
 
@@ -37,16 +39,16 @@
                         </label>
                         <div class="caption">
                            <div class="form-group">
-                        <input class="input" type="text" name="nameOth" placeholder="Họ và tên" value="" readonly>
+                        <input class="input" type="text" name="nameOth" placeholder="Họ và tên" value="" >
                     </div>
                     <div class="form-group">
-                        <input class="input" type="email" name="emailOth" placeholder="Email" value="" readonly>
+                        <input class="input" type="email" name="emailOth" placeholder="Email" value="" >
                     </div>
                     <div class="form-group">
-                        <input class="input" type="text" name="addressOth" placeholder="Địa chỉ" value="" readonly>
+                        <input class="input" type="text" name="addressOth" placeholder="Địa chỉ" value="" >
                     </div>
                     <div class="form-group">
-                        <input class="input" type="tel" name="telOth" placeholder="Số điện thoại" value="" readonly>
+                        <input class="input" type="tel" name="telOth" placeholder="Số điện thoại" value="">
                     </div>
                         </div>
                     </div>
@@ -59,21 +61,22 @@
                 <div class="section-title text-center">
                     <h3 class="title">Đơn hàng</h3>
                 </div>
-                <div class="order-summary">
+                <div id="order"></div>
+                {{!-- <div class="order-summary">
                     <div class="order-col">
                         <div><strong>SẢN PHẨM</strong></div>
                         <div><strong>TỔNG CỘNG</strong></div>
                     </div>
-                    <div class="order-products">
-                        <div class="order-col">
+                    <div class="order-products"> --}}
+                        {{!-- <div class="order-col">
                             <div>1x Product Name Goes Here</div>
                             <div>$980.00</div>
                         </div>
                         <div class="order-col">
                             <div>2x Product Name Goes Here</div>
                             <div>$980.00</div>
-                        </div>
-                    </div>
+                        </div> --}}
+                    {{!-- </div>
                     <div class="order-col">
                         <div>Phí vận chuyển</div>
                         <div><strong>MIỄN PHÍ</strong></div>
@@ -92,14 +95,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="input-checkbox">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">
-                        <span></span>
-                        Tôi đồng ý</a>
-                    </label>
-                </div>
-                <button type="submit" class="primary-btn order-submit form-control" style="padding-bottom: 50px">Đặt hàng</button>
+                <button type="submit" onclick="pay()" class="primary-btn order-submit form-control" style="padding-bottom: 50px">Đặt hàng</button> --}}
             </div>
             <!-- /Order Details -->
         </form>
