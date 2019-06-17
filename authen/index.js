@@ -8,7 +8,7 @@ const serializeUser = (user, done) => {
 
 const deserializeUser = (id, done) => {
     User.findById(id, (err, user) => {
-        console.log(user);
+        console.log("de", user);
         done(err, user);
     });
 }

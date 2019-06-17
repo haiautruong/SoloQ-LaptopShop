@@ -1,10 +1,10 @@
 const dbs = require('../database/index');
-let product = dbs.product;
-let category = dbs.category;
-let user = dbs.user;
+let Product = dbs.product;
+let Category = dbs.category;
+
 
 let listCategory;
-category.find()
+Category.find()
     .exec((err, list) => {
         if (err)
             item.push(err);
@@ -12,25 +12,12 @@ category.find()
     });
 
 let listProduct;
-product.find()
+Product.find()
     .exec((err, list) => {
         if (err)
             item.push(err);
         listProduct = list;
     });
-
-// exports.index = (req, res) => {
-//     console.log("Show session", req.session);
-//     console.log("Show user", req.user);
-//     if (req.session.userId) {
-//         let userSession = req.session;
-//         console.log('userSession', userSession);
-//         console.log('username', userSession.username);
-//         res.render('index', { listProduct, listCategory, userSession })
-//     } else {
-//         res.render('index', { listProduct, listCategory })
-//     }
-// }
 
 exports.index = (req, res) => {
     if (req.session.passport && req.user) {
@@ -41,17 +28,3 @@ exports.index = (req, res) => {
         res.render('layouts/index', { listProduct, listCategory })
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

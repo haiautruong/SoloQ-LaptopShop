@@ -4,23 +4,23 @@
     <div class="container">
         <!-- row -->
         <div class="row">
-            {{#each listCategory}}
             <!-- shop -->
+            {{#each listCategory}}
             <div class="col-md-4 col-xs-6">
                 <div class="shop">
                     <div class="shop-img">
                         <img src="/images/shop01.png" alt="">
                     </div>
                     <div class="shop-body">
-                        <h3>Dòng sản phẩm<br>{{this.name}}</h3>
-                        <a href="/product/{{this._id}}" class="cta-btn">Xem ngay
+                        <h3>Dòng sản phẩm<br>{{name}}</h3>
+                        <a href="/product/category/{{this._id}}" class="cta-btn">Xem ngay
                             <i class="fa fa-arrow-circle-right"></i>
                         </a>
                     </div>
                 </div>
             </div>
-            <!-- /shop -->
             {{/each}}
+            <!-- /shop -->
         </div>
         <!-- /row -->
     </div>
@@ -58,18 +58,17 @@
                                             <img style="height: 200px" src="/images/{{this.image}}" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <p class="product-category">{{this.categoryCode}}</p>
+                                            <p class="product-category">{{this.categoryCode.name}}</p>
                                             <h3 class="product-name">
                                                 <a href="#">{{this.name}}</a>
                                             </h3>
                                             <h4 class="product-price">{{this.price}}</h4>
-                                            <div class="product-rating">
-                                                {{{getStar vote}}}
+                                            <div class="product-rating" id="wrapStar">
                                             </div>
                                             <div class="product-btns">
-                                                <button class="quick-view">
+                                                <a class="quick-view" href="/product/detail/{{this._id}}">
                                                     <i class="fa fa-eye"></i>
-                                                    <span class="tooltipp">quick view</span></button>
+                                                    <span class="tooltipp">xem ngay</span></a>
                                             </div>
                                     </a>
                                 </div>

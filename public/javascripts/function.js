@@ -1,4 +1,4 @@
-var isSupportLocalStorge = typeof(Storage)
+var isSupportLocalStorge = typeof (Storage)
     ? true
     : false;
 let qtyCart = 0;
@@ -47,8 +47,6 @@ function handleCart(id) {
         : [];
 
     let test = localStorage.getItem("listItemCart");
-    console.log(typeof(test));
-    console.log(currentList);
 
     let myRes;
 
@@ -60,10 +58,10 @@ function handleCart(id) {
         },
         async: false,
         success: (res, status) => {
-            myRes = res;
+
             res.forEach(element => {
                 currentList.forEach(elm => {
-                    console.log("elm", elm)
+
                     if (element._id === elm.idCart) {
                         total += `
                 <div class="product-widget">
@@ -81,8 +79,9 @@ function handleCart(id) {
                         <i class="fa fa-close"></i>
                     </button>
                 </div>`;
+                        return;
                     }
-                })
+                });
 
             });
 
@@ -91,3 +90,113 @@ function handleCart(id) {
     });
 
 }
+
+$(document).ready(function () {
+    let id = window.location.pathname.split('/')[3];
+
+    if ($('#commentsPagination').length == 0) {
+        return;
+    }
+
+    $('#commentsPagination').pagination({
+        dataSource: `http://localhost:3000/api/get-comments?id=${id}`,
+        locator: 'comments',
+        totalNumberLocator: function (response) {
+            return response.total;
+        },
+        pageSize: 2,
+        ajax: {
+            beforeSend: function () {
+                console.log("get commments call");
+                $('#listComments').html('Loading data ...');
+            }
+        },
+        callback: function (data, pagination) {
+            console.log(data);
+            console.log("pagination", pagination);
+            let pageContent = data;
+            let html = "";
+            pageContent.forEach(elm => {
+                let starHtml = "";
+
+                for (let i = 1; i <= elm.rating; i++) {
+                    starHtml += `<i class="fa fa-star"></i>`;
+                }
+                for (let i = elm.rating + 1; i <= 5; i++) {
+                    starHtml += `<i class="fa fa-star-o empty"></i>`;
+                }
+
+                html += `<li>
+                    <div class="review-heading">
+                        <h5 class="name">${elm.name}</h5>
+                        <p class="date">${elm.createdAt}</p>
+                        <div class="review-rating">
+                            ${starHtml}
+                        </div>
+                    </div>
+                    <div class="review-body">
+                        <p>${elm.comment}</p>
+                    </div>
+                </li>`;
+            })
+            $('#listComments').html(html);
+        }
+    });
+
+});
+
+$(document).ready(function () {
+    let type = window.location.pathname.split('/')[2];
+    let id = window.location.pathname.split('/')[3];
+
+    if ($('#pagination-store').length == 0) {
+        return;
+    }
+
+    $('#pagination-store').pagination({
+        dataSource: `http://localhost:3000/api/store-pagination?name=${type}&id=${id}`,
+        locator: 'products',
+        totalNumberLocator: function (response) {
+            return response.total;
+        },
+        pageSize: 3,
+        ajax: {
+            beforeSend: function () {
+                $('#store-products').html('Loading data ...');
+            }
+        },
+        callback: function (data, pagination) {
+            console.log(data);
+            console.log("pagination", pagination);
+            let pageContent = data;
+            let html = "";
+            pageContent.forEach(elm => {
+                console.log("paging-product: ", elm);
+                html += `
+                <div class="col-md-4 col-xs-6">
+                    <div class="product">
+                        <a href="/product/detail/${elm._id}" class="product-detail-href">
+                        <div class="product-img">
+                            <img style="height: 200px" src="/images/${elm.image}" alt="">
+                        </div>
+                        <div class="product-body">
+                            <p class="product-category">${elm.categoryCode.name} - ${elm.brandCode.name}</p>
+                            <h3 class="product-name"><a href="/product/detail/${elm._id}">${elm.name}</a></h3>
+                            <h4 class="product-price">${elm.price}</h4>
+                            <div class="product-btns">
+                                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">xem ngay</span></button>
+                            </div>
+                        </div>
+                        <div class="add-to-cart">
+                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart" id=${elm._id} onclick="addCart(this.id)"></i> thêm vào
+                                giỏ</button>
+                        </div>
+                        </a>
+                    </div>
+                </div>`;
+            })
+            $('#store-products').html(html);
+        }
+    });
+
+});

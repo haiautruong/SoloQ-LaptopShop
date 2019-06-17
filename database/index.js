@@ -1,10 +1,11 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const categorySchema = require("../models/category");
-const productSchema = require("../models/product");
+const category = require("../models/category");
+const product = require("../models/product");
 const user = require("../models/user");
-const brandSchema = require("../models/brand");
+const brand = require("../models/brand");
+const comment = require("../models/comment");
 
 
 const url = "mongodb+srv://admin0:1234567890@webshop-xftef.mongodb.net/laptop-shop";
@@ -19,14 +20,15 @@ mongoose.connect(
 
 mongoose.set('useCreateIndex', true);
 
-const product = mongoose.model("product", productSchema);
-const category = mongoose.model("category", categorySchema);
-const brand = mongoose.model("brand", brandSchema);
+// const product = mongoose.model("product", productSchema);
+// const category = mongoose.model("category", categorySchema);
+// const brand = mongoose.model("brand", brandSchema);
 
 
 module.exports = {
   product,
   category,
   user,
-  brand
+  brand,
+  comment
 }

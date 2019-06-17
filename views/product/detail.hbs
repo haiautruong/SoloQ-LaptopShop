@@ -4,13 +4,11 @@
 	<div class="container">
 		<!-- row -->
 		<div class="row">
-			{{#if product}}
-			{{#with product}}
 			<!-- Product main img -->
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
 					<div class="product-preview">
-						<img src="/images/{{image}}" alt="">
+						<img src="/images/{{product.image}}" alt="">
 					</div>
 
 					<div class="product-preview">
@@ -32,7 +30,7 @@
 			<div class="col-md-2  col-md-pull-5">
 				<div id="product-imgs">
 					<div class="product-preview">
-						<img src="/images/{{image}}" alt="">
+						<img src="/images/{{product.image}}" alt="">
 					</div>
 
 					<div class="product-preview">
@@ -53,26 +51,23 @@
 			<!-- Product details -->
 			<div class="col-md-5">
 				<div class="product-details">
-					<h2 class="product-name">{{name}}</h2>
+					<h2 class="product-name">{{product.name}}</h2>
 					<div>
 						<div class="product-rating">
-							{{{getStar vote}}}
 						</div>
 					</div>
 					<div>
-						<h3 class="product-price">{{price}}</h3>
-						<span class="product-available">Còn hàng?</span>
+						<h3 class="product-price">{{product.price}}</h3>
 					</div>
-					<p>Thông tin quà tặng</p>
+					<p>{{product.voucher}}</p>
 
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> thêm vào giỏ</button>
+						<button class="add-to-cart-btn" id="{{product._id}}" onclick="addCart(product.id)"><i
+								class="fa fa-shopping-cart"></i> thêm vào giỏ</button>
 					</div>
 					<ul class="product-links">
 						<li>Danh mục:</li>
-						{{#each category}}
-						<li><a href="#">{{this.name}}</a></li>
-						{{/each}}
+						<li><a href="/product/category/{{product.category._id}}">{{product.categoryCode.name}}</a></li>
 					</ul>
 				</div>
 			</div>
@@ -95,7 +90,7 @@
 						<div id="tab1" class="tab-pane fade in active">
 							<div class="row">
 								<div class="col-md-12">
-									<p>Thông tin thêm</p>
+									<p>{{product.more_info}}</p>
 								</div>
 							</div>
 						</div>
@@ -115,31 +110,31 @@
 										<tbody>
 											<tr>
 												<th scope="col">Tên</th>
-												<td></td>
+												<td>{{product.name}}</td>
 											</tr>
 											<tr>
 												<th scope="col">RAM</th>
-												<td></td>
+												<td>{{product.ram}}</td>
 											</tr>
 											<tr>
 												<th scope="col">Ổ cứng</th>
-												<td></td>
+												<td>{{product.disk}}</td>
 											</tr>
 											<tr>
 												<th scope="col">Màn hình</th>
-												<td></td>
+												<td>{{product.screen}}</td>
 											</tr>
 											<tr>
 												<th scope="col">Pin</th>
-												<td></td>
+												<td>{{product.pin_battery}}</td>
 											</tr>
 											<tr>
 												<th scope="col">CPU</th>
-												<td></td>
+												<td>{{product.cpu}}</td>
 											</tr>
 											<tr>
-												<th scope="col">Xuất xứ</th>
-												<td></td>
+												<th scope="col">Xuất xứ - Bảo hành</th>
+												<td>{{product.warranty}}</td>
 											</tr>
 										</tbody>
 									</table>
@@ -147,7 +142,6 @@
 							</div>
 						</div>
 						<!-- /tab2  -->
-
 						<!-- tab3  -->
 						<div id="tab3" class="tab-pane fade in">
 							<div class="row">
@@ -238,48 +232,15 @@
 								<!-- Reviews -->
 								<div class="col-md-6">
 									<div id="reviews">
-										<ul class="reviews">
-											<li>
-												<div class="review-heading">
-													<h5 class="name">John</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
-													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
-													</div>
-												</div>
-												<div class="review-body">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-														eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-												</div>
-											</li>
-											<li>
-												<div class="review-heading">
-													<h5 class="name">John</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
-													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
-													</div>
-												</div>
-												<div class="review-body">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-														eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-												</div>
-											</li>
+										<ul class="reviews" id="listComments">
+
 										</ul>
-										<ul class="reviews-pagination">
-											<li class="active">1</li>
+										<ul class="reviews-pagination" id="commentsPagination">
+											{{!-- <li class="active">1</li>
 											<li><a href="#">2</a></li>
 											<li><a href="#">3</a></li>
 											<li><a href="#">4</a></li>
-											<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+											<li><a href="#"><i class="fa fa-angle-right"></i></a></li> --}}
 										</ul>
 									</div>
 								</div>
@@ -288,14 +249,24 @@
 								<!-- Review Form -->
 								<div class="col-md-3">
 									<div id="review-form">
-										<form class="review-form">
-											<input class="input" type="text" placeholder="Tên">
-											<textarea class="input" placeholder="Bình luận"></textarea>
+										<form class="review-form" method="POST" action="/product/comments">
+											<input class="input" type="text" name="idProduct" value="{{product._id}}"
+												style="display: none" readonly required>
+											{{#if userSession}}
+											{{#with userSession}}
+											<input class="input" type="text" placeholder="Tên" name="name"
+												value="{{name}}" readonly required />
+											{{/with}}
+											{{else}}
+											<input class="input" type="text" placeholder="Tên" name="name" required>
+											{{/if}}
+											<textarea class="input" placeholder="Bình luận" name="comment"
+												required></textarea>
 											<div class="input-rating">
 												<span>Đánh giá: </span>
 												<div class="stars">
-													<input id="star5" name="rating" value="5" type="radio"><label
-														for="star5"></label>
+													<input id="star5" name="rating" value="5" type="radio"
+														required><label for="star5"></label>
 													<input id="star4" name="rating" value="4" type="radio"><label
 														for="star4"></label>
 													<input id="star3" name="rating" value="3" type="radio"><label
@@ -319,8 +290,6 @@
 				</div>
 			</div>
 			<!-- /product tab -->
-			{{/with}}
-			{{/if}}
 		</div>
 
 		<!-- /row -->
@@ -343,20 +312,23 @@
 			</div>
 
 			<!-- product -->
+			{{#each listRelated}}
 			<div class="col-md-3 col-xs-6">
 				<div class="product">
-					<div class="product-img">
-						<img src="/images/product01.png" alt="">
-					</div>
+					<a href="/product/detail/{{_id}}" class="product-detail-href">
+						<div class="product-img">
+							<img src="/images/{{image}}" alt="">
+						</div>
+					</a>
 					<div class="product-body">
-						<p class="product-category">Category</p>
-						<h3 class="product-name"><a href="#">product name goes here</a></h3>
-						<h4 class="product-price">$980.00</h4>
+						<p class="product-category">{{categoryCode.name}}</p>
+						<h3 class="product-name"><a href="/product/detail/{{_id}}">{{name}}</a></h3>
+						<h4 class="product-price">{{price}}</h4>
 						<div class="product-rating">
 						</div>
 						<div class="product-btns">
-							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick
-									view</span></button>
+							<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">xem
+									ngay</span></button>
 						</div>
 					</div>
 					<div class="add-to-cart">
@@ -364,6 +336,7 @@
 					</div>
 				</div>
 			</div>
+			{{/each}}
 			<!-- /product -->
 
 		</div>
