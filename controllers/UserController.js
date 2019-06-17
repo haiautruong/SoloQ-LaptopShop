@@ -119,9 +119,15 @@ exports.account = (req, res) => {
 }
 
 exports.change = (req, res) => {
+
     if (req.isAuthenticated()) {
+        let messageFlash = req.flash('message');
+        console.log("messageFlash", messageFlash);
+
+        let messRes = messageFlash.length == 0 ? null : messageFlash[0];
         let userSession = req.user;
-        res.render('user/changePass', { listCategory, userSession });
+
+        res.render('user/changePass', { listCategory, userSession, messRes});
     }
     else {
         res.redirect('/users/login');
@@ -129,26 +135,76 @@ exports.change = (req, res) => {
 }
 
 exports.saveChange = (req, res) => {
-    if (req.isAuthenticated()) {
-        let userSession = req.user;
-        const curPassword = req.body.password_cur;
-        const newPassword = req.body.password_new;
-        const renewPassword = req.body.password_renew;
+    try {
+        console.log("change pass");
+        if (req.isAuthenticated()) {
 
-        bcrypt.compare(curPassword, userSession.password, (err, status) => {
-            if (err) {
-                req.flash('message', 'Mật khẩu hiện tại không chính xác!');
-            } else {
-                if (newPassword !== renewPassword) {
-                    req.flash('message', 'Mật khẩu hiện tại không chính xác!');
+            let userSession = req.user;
+            const curPassword = req.body.password_cur;
+            const newPassword = req.body.password_new;
+            const renewPassword = req.body.password_renew;
+
+            bcrypt.compare(curPassword, userSession.password, (err, status) => {
+                console.log("Status", status);
+                if (err || status == false) {
+                    console.log("err bcrypt", err);
+                    req.flash('message', {
+                        status: 0,
+                        message: 'Mật khẩu không hiện tại không chính xác!'
+                    });
+
+                    res.redirect('/users/change-pass');
                 } else {
-                    // User.update({_id: userSession._id}, {
-                    //     password
-                    // })
-                    req.flash('message', 'Đổi mật khẩu thành công');
+                    console.log("new pass", newPassword);
+                    if (newPassword !== renewPassword) {
+                        req.flash('message', {
+                            status: 0,
+                            message: 'Mật khẩu không trùng khớp!'
+                        });
+                        
+                        res.redirect('/users/change-pass');
+
+                    } else {
+                        // User.update({_id: userSession._id}, {
+                        //     password
+                        // })
+                        bcrypt.hash(newPassword, 10, function (err, hashPass) {
+                            if (err) {
+                                req.flash('message', {
+                                    status: 0,
+                                    message: 'Đổi mật khẩu không thành công!'
+                                });
+                                res.redirect('/users/change-pass');
+
+                            } else {
+                                User.findOneAndUpdate({ _id: userSession._id }, { password: hashPass }, (err) => {
+                                    if (err) {
+                                        req.flash('message', {
+                                            status: 0,
+                                            message: 'Đổi mật khẩu không thành công!'
+                                        });
+                                        res.redirect('/users/change-pass');
+
+                                        console.log(err);
+                                    } else {
+                                        req.flash('message', {
+                                            status: 1,
+                                            message: 'Đổi mật khẩu thành công!'
+                                        });
+
+                                        res.redirect('/users/change-pass');
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
-            }
-        });
+
+            });
+        }
+    }
+    catch (err) {
+        console.log(err);
     }
 
 }

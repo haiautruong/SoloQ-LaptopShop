@@ -7,23 +7,51 @@ let Brand = dbs.brand;
 const Category = dbs.category;
 
 exports.detail = (req, res) => {
-    Product.getProduct(req.params.id).exec((err, product) => {
-        if (err) {
-            console.log(err);
+    let idProduct = req.params.id;
+    console.log("id", idProduct);
+    Product.getProduct(idProduct).exec((err, product) => {
+        if(err){
+            console.log("store: ", err);
         }
-        else {
+        else{
+            product.view++;
+            console.log("view: ", product.view);
             Product.getProducts('category', product.categoryCode).limit(4).exec((err, listRelated) => {
                 if (err) {
                     console.log("related: ", err);
                 }
                 else {
+                    Product.findOneAndUpdate({_id: idProduct}, {view: product.view}, (err) =>{
+                        if(err){
+                            console.log(err);
+                        }
+                    })
+                    
                     let user = req.user;
-                    console.log("ABC", user);
                     res.render('product/detail', { product, listRelated, userSession: user });
                 }
             });
         }
     })
+
+
+    // Product.getProduct(req.params.id).exec((err, product) => {
+    //     if (err) {
+    //         console.log(err);
+    //     }
+    //     else {
+    //         Product.getProducts('category', product.categoryCode).limit(4).exec((err, listRelated) => {
+    //             if (err) {
+    //                 console.log("related: ", err);
+    //             }
+    //             else {
+    //                 let user = req.user;
+    //                 console.log("ABC", user);
+    //                 res.render('product/detail', { product, listRelated, userSession: user });
+    //             }
+    //         });
+    //     }
+    // })
 }
 
 exports.store = (req, res) => {

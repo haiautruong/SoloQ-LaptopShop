@@ -16,18 +16,28 @@
             <div class="row myborder">
                 <form method="post" action="/users/change-pass">
                     <h4 style="color: #05b56ba6; margin-bottom: 10px;">Đổi mật khẩu</h4>
+                    {{#if messRes}}
+                    {{#with messRes}}
+                        {{#if status}}
+                            <label name="notyfy" class="text-info" style="font-size: 14px">{{message}}</label>
+                        {{else}}
+                            <label name="notyfy" class="text-danger" style="font-size: 14px">{{message}}</label>
+                        {{/if}}
+                    {{/with}}
+                    {{/if}}
+
                     <hr>
                     <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu hiện tại</label>
                     <div class="input-group margin-bottom-20">
                         <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
-                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password"
-                            name="password_cur" type="password" required>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password_cur"
+                            type="password" required>
                     </div>
                     <label style="font-style:italic;  font-weight: 500; color: #048625d2">Mật khẩu mới</label>
                     <div class="input-group margin-bottom-20">
                         <span class="input-group-addon"><i class="fa fa-lock mycolor"></i></span>
-                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password"
-                            name="password_new" type="password" required>
+                        <input size="60" maxlength="255" class="form-control" placeholder="Mật khẩu" name="password_new"
+                            type="password" required>
                     </div>
                     <label style="font-style:italic;  font-weight: 500; color: #048625d2">Xác nhận mật khẩu</label>
                     <div class="input-group margin-bottom-20">
