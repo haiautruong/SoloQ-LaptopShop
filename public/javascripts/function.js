@@ -92,6 +92,85 @@ function handleCart(id) {
 }
 
 $(document).ready(function () {
+    let pathname = window.location.pathname;
+    if (pathname !== '/users/cart') {
+        return;
+    }
+
+    console.log("in carttttt");
+
+    let html = "";
+    let currentList = localStorage.getItem("listItemCart")
+        ? JSON.parse(localStorage.getItem('listItemCart'))
+        : [];
+
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/get-products',
+        data: {
+            list_products: currentList
+        },
+        async: false,
+        success: (res, status) => {
+            let total = 0;
+            res.forEach(element => {
+                currentList.forEach(elm => {
+
+                    if (element._id === elm.idCart) {
+                        let sumItem = element.price * parseInt(elm.counter);
+                        total += sumItem;
+                        console.log(sumItem)
+                        html += `<tr>
+                        <td>
+                            <div>
+                                <img src="/images/${element.image}" alt="" style="width: 150px" />
+                                <span style="font-weight: 500">${element.name}</span>
+                            </div>
+                        </td>
+                        <td>
+                            ${element.price}
+                        </td>
+                        <td>
+                            <div class="product_count">
+                                <input type="number" name="qty" id="sst" maxlength="12" value="${elm.counter}"
+                                    title="Quantity:" class="input-text qty"></div>
+                        </td>
+                        <td>
+                            ${sumItem}
+                        </td>
+                        <td>
+                            <button class="btn" style="background-color: transparent">
+                                <span style="color: Tomato;">
+                                    <i id="delete" class="fa fa-trash-o fa-2x"></i>
+                                </span>
+                            </button>
+                            
+                        </td>
+                    </tr>`;
+                        return;
+                    }
+                });
+
+            });
+
+            html += `<tr>
+                        <td colspan="3" style="text-align: right; font-weight: bold; padding-right: 18px">Tổng
+                            cộng</td>
+                        <td colspan="2">
+                            ${total}
+                        </td>
+
+                    </tr>`;
+
+            $('#cartProducts').html(html);
+            let btnPay = `<a href="/users/checkout" class="primary-btn">Thanh toán</a>`
+            $("#wrapBtnPay").html(btnPay)
+        }
+    });
+});
+
+$(document).ready(function () {
     let id = window.location.pathname.split('/')[3];
 
     if ($('#commentsPagination').length == 0) {

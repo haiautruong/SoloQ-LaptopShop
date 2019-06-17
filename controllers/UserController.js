@@ -83,7 +83,6 @@ exports.indexSignup = (req, res) => {
         return res.render('user/signup', { listCategory, notify, data });
     } else {
         req.redirect('/')
-
     }
 }
 
@@ -102,9 +101,26 @@ exports.cart = (req, res) => {
 
 }
 
+exports.checkout = (req, res) => {
+    if (req.isAuthenticated()) {
+        let userSession = req.user;
+        res.render('user/checkout', { listCategory, userSession });
+    }
+    else {
+        req.session.returnTo = '/users/checkout';
+        res.redirect('/users/login');
+    }
+}
+
 exports.history = (req, res) => {
-    let userSession = req.user;
-    res.render('user/history', { listCategory, userSession });
+    if (req.isAuthenticated()) {
+        let userSession = req.user;
+        res.render('user/history', { listCategory, userSession });
+    }
+    else {
+        req.session.returnTo = '/users/history';
+        res.redirect('/users/login');
+    }
 }
 
 exports.account = (req, res) => {
@@ -113,7 +129,8 @@ exports.account = (req, res) => {
         res.render('user/account', { listCategory, userSession });
     }
     else {
-        res.redirect('/');
+        req.session.returnTo = '/users/account';
+        res.redirect('/users/login');
     }
 
 }
