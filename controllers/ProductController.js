@@ -34,24 +34,6 @@ exports.detail = (req, res) => {
         }
     })
 
-
-    // Product.getProduct(req.params.id).exec((err, product) => {
-    //     if (err) {
-    //         console.log(err);
-    //     }
-    //     else {
-    //         Product.getProducts('category', product.categoryCode).limit(4).exec((err, listRelated) => {
-    //             if (err) {
-    //                 console.log("related: ", err);
-    //             }
-    //             else {
-    //                 let user = req.user;
-    //                 console.log("ABC", user);
-    //                 res.render('product/detail', { product, listRelated, userSession: user });
-    //             }
-    //         });
-    //     }
-    // })
 }
 
 exports.store = (req, res) => {

@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 let category = dbs.category;
 let User = dbs.user;
 let Brand = dbs.brand;
+let Transaction = dbs.transaction;
 
 var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({
@@ -83,7 +84,6 @@ exports.indexSignup = (req, res) => {
         return res.render('user/signup', { listCategory, notify, data });
     } else {
         req.redirect('/')
-
     }
 }
 
@@ -102,9 +102,73 @@ exports.cart = (req, res) => {
 
 }
 
+exports.checkout = (req, res) => {
+    if (req.isAuthenticated()) {
+        Brand.getAllBrands().exec((err, listBrand) => {
+            let userSession = req.user;
+            console.log(userSession);
+            res.render('user/checkout', { listCategory, userSession, listBrand });
+        });
+    }
+    else {
+        req.session.returnTo = '/users/checkout';
+        res.redirect('/users/login');
+    }
+}
+
+//post
+exports.placeOrder = (req, res) => {
+    console.log("body", req.body);
+    console.log(req.user);
+    let result = JSON.parse(req.body.listProductPay);
+    console.log("result", result);
+
+
+    const idUser = req.user._id;
+    const listProducts = result.listProducts;
+    const total = result.total;
+    const status = -1;
+    const address = req.body.address;
+    const phone = req.body.phone;
+
+    const transaction = new Transaction({
+        idUser,
+        listProducts,
+        total,
+        status,
+        phone,
+        address
+    });
+
+    console.log("Transaction", transaction);
+    console.log("listTrans", transaction.listProducts);
+    transaction.save((err) => {
+        if(err){
+            console.log("err save transaction: ", err);
+        }
+        else{
+            res.redirect('/users/history');
+        }
+    })
+}
+
 exports.history = (req, res) => {
-    let userSession = req.user;
-    res.render('user/history', { listCategory, userSession });
+    if (req.isAuthenticated()) {
+        let userSession = req.user;
+        Brand.getAllBrands().exec((err, listBrand) => {
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.render('user/history', { listCategory, userSession, listBrand });
+
+            }
+        })
+    }
+    else {
+        req.session.returnTo = '/users/history';
+        res.redirect('/users/login');
+    }
 }
 
 exports.account = (req, res) => {
@@ -113,7 +177,8 @@ exports.account = (req, res) => {
         res.render('user/account', { listCategory, userSession });
     }
     else {
-        res.redirect('/');
+        req.session.returnTo = '/users/account';
+        res.redirect('/users/login');
     }
 
 }
@@ -130,6 +195,7 @@ exports.change = (req, res) => {
         res.render('user/changePass', { listCategory, userSession, messRes});
     }
     else {
+        req.session.returnTo = '/users/change-pass';
         res.redirect('/users/login');
     }
 }

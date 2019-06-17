@@ -146,90 +146,6 @@
 						<!-- tab3  -->
 						<div id="tab3" class="tab-pane fade in">
 							<div class="row">
-								<!-- Rating -->
-								<div class="col-md-3">
-									<div id="rating">
-										<div class="rating-avg">
-											<span>4.5</span>
-											<div class="rating-stars">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</div>
-										</div>
-										<ul class="rating">
-											<li>
-												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-												</div>
-												<div class="rating-progress">
-													<div style="width: 80%;"></div>
-												</div>
-												<span class="sum">3</span>
-											</li>
-											<li>
-												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="rating-progress">
-													<div style="width: 60%;"></div>
-												</div>
-												<span class="sum">2</span>
-											</li>
-											<li>
-												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="rating-progress">
-													<div></div>
-												</div>
-												<span class="sum">0</span>
-											</li>
-											<li>
-												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="rating-progress">
-													<div></div>
-												</div>
-												<span class="sum">0</span>
-											</li>
-											<li>
-												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-												</div>
-												<div class="rating-progress">
-													<div></div>
-												</div>
-												<span class="sum">0</span>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<!-- /Rating -->
-
 								<!-- Reviews -->
 								<div class="col-md-6">
 									<div id="reviews">
@@ -237,18 +153,13 @@
 
 										</ul>
 										<ul class="reviews-pagination" id="commentsPagination">
-											{{!-- <li class="active">1</li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#"><i class="fa fa-angle-right"></i></a></li> --}}
 										</ul>
 									</div>
 								</div>
 								<!-- /Reviews -->
 
 								<!-- Review Form -->
-								<div class="col-md-3">
+								<div class="col-md-6">
 									<div id="review-form">
 										<form class="review-form" method="POST" action="/product/comments">
 											<input class="input" type="text" name="idProduct" value="{{product._id}}"
