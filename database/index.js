@@ -5,6 +5,7 @@ const category = require("../models/category");
 const product = require("../models/product");
 const user = require("../models/user");
 const brand = require("../models/brand");
+const comment = require("../models/comment");
 
 
 const url = "mongodb+srv://admin0:1234567890@webshop-xftef.mongodb.net/laptop-shop";
@@ -28,5 +29,6 @@ module.exports = {
   product,
   category,
   user,
-  brand
+  brand,
+  comment
 }

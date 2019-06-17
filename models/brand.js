@@ -10,6 +10,9 @@ const brandSchema = new mongoose.Schema(
     }
 )
 
+brandSchema.statics.getAllBrands = () => {
+    return Brand.find();
+}
 
 
 const Brand = mongoose.model('brand', brandSchema);

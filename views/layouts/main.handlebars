@@ -31,8 +31,9 @@
     <link type="text/css" rel="stylesheet" href="/stylesheets/style.css">
 
     <!-- Pagination -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css" integrity="sha256-fFqxRJ9q487bQTOBfn4T8jkJt8IGlrVzTeauNnuRHVA=" crossorigin="anonymous" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css"
+        integrity="sha256-fFqxRJ9q487bQTOBfn4T8jkJt8IGlrVzTeauNnuRHVA=" crossorigin="anonymous" />
+
 </head>
 
 <body>
@@ -64,7 +65,14 @@
                     <li>
                         <a href="/users/account">
                             <i class="fa fa-user-o"></i>
-                            Xin chào, {{name}}</a>
+                            Xin chào, {{name}}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/users/logout">
+                            <i class="fa fa-sign-out"></i>
+                            Thoát
+                        </a>
                     </li>
                     {{/with}}
                     {{else}}
@@ -172,9 +180,26 @@
                     </li>
                     {{#each listCategory}}
                     <li>
-                        <a href="#">{{name}}</a>
+                        <a href="/product/category/{{this._id}}">{{name}}</a>
                     </li>
                     {{/each}}
+                    <li class="dropdown">
+                        {{!-- <div class="dropdown mydropdown"> --}}
+                        <a class="dropdown-toggle" type="button" id="dropdownMenuBrand" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Nhà sản xuất
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <ul>
+                                {{#each listBrand}}
+                                <li class="tab-brand">
+                                    <a class="dropdown-item" href="/product/brand/{{this._id}}">{{name}}</a>
+                                </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 <!-- /NAV -->
             </div>
@@ -320,8 +345,10 @@
 
     <!-- jQuery Plugins -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Paging/1.2.0/jquery.paging.js" integrity="sha256-yOz+dHyXn72HYkkTIAqSNzQ2eZI7SViFvO0Im4D8hPY=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Paging/1.2.0/jquery.paging.min.js" integrity="sha256-yKBqJUtRW5tVKYFZBsO6C/NXvCx7T4gkzwj36E0dZ8U=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Paging/1.2.0/jquery.paging.js"
+        integrity="sha256-yOz+dHyXn72HYkkTIAqSNzQ2eZI7SViFvO0Im4D8hPY=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-Paging/1.2.0/jquery.paging.min.js"
+        integrity="sha256-yKBqJUtRW5tVKYFZBsO6C/NXvCx7T4gkzwj36E0dZ8U=" crossorigin="anonymous"></script>
     <script src="/javascripts/jquery.min.js"></script>
     <script src="/javascripts/jquery.zoom.min.js"></script>
     <script src="https://pagination.js.org/dist/2.1.4/pagination.min.js"></script>

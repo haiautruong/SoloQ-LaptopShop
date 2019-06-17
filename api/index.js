@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const dbs = require('../database/index');
 let Product = dbs.product;
+let Comment = dbs.comment;
 
 exports.listProducts = (req, res) => {
     console.log(req.query.list_products);
@@ -18,7 +19,7 @@ exports.listProducts = (req, res) => {
         }
     }).populate('categoryCode')
         .exec((err, docs) => {
-            console.log(docs.length);
+            console.log(docs);
             res.send(docs);
         });
 
@@ -30,15 +31,18 @@ exports.storePagination = (req, res) => {
 
         let perPage = parseInt(req.query.pageSize);
         let page = Math.max(0, parseInt(req.query.pageNumber));
+        let type = req.query.name;
+        let id = req.query.id;
 
-        Product.getProductsWithCategory(req.params.id, perPage, page).exec((err, products) => {
+
+        Product.getProducts(type, id, perPage, page).exec((err, products) => {
             if (err) {
                 res.status(500);
                 res.send(err.message);
                 console.log(err);
             }
             else {
-                Product.countAllProducts(req.params.id).exec((err, count) => {
+                Product.countAllProducts(type, id).exec((err, count) => {
                     if (err) {
                         res.status(500);
                         res.send(err.message);
@@ -61,36 +65,44 @@ exports.storePagination = (req, res) => {
         res.send(e.message);
         console.log(e.message);
     }
+}
+
+exports.commentsPagination = (req, res) => {
+    try {
+
+        let perPage = parseInt(req.query.pageSize);
+        let page = Math.max(0, parseInt(req.query.pageNumber));
+
+        let id = req.query.id;
 
 
-    // Product.find({
-    //     categoryCode: req.params.id
-    // })
-    // .limit(perPage)
-    // .skip(perPage * (page - 1))
-    // .populate('categoryCode')
-    // .exec(function(err, products) {
-    //     if(err){
-    //         console.log("api: find: ", err);
-    //     }
-    //     else{
-    //         Product.countDocuments({
-    //             categoryCode: req.params.id
-    //         }).exec(function(err, count) {
-    //             if(err){
-    //                 console.log("api: err count", err)
-
-    //             }
-    //             else{
-    //                 page = {
-    //                     products: products,
-    //                     pageNumber: page,
-    //                     total: count
-    //                 }
-
-    //                 res.send(page);
-    //             }
-    //         })
-    //     }
-    // })
+        Comment.getComments(id, perPage, page).exec((err, comments) => {
+            if (err) {
+                res.status(500);
+                res.send(err.message);
+                console.log(err);
+            }
+            else {
+                Comment.countAllComments(id).exec((err, count) => {
+                    if (err) {
+                        res.status(500);
+                        res.send(err.message);
+                        console.log(err)
+                    }
+                    else {
+                        const data = {
+                            comments: comments,
+                            pageNumber: page,
+                            total: count
+                        }
+                        res.send(data);
+                    }
+                })
+            }
+        });
+    } catch (e) {
+        res.status(500);
+        res.send(e.message);
+        console.log(e.message);
+    }
 }
