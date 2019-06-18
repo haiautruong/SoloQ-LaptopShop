@@ -13,40 +13,57 @@
             <!-- /account tab nav -->
         </div>
         <!-- account tab content -->
-        <div class="col-sm-8 col-md-8 col-md-offset-1">
+        <div class="col-sm-8 col-md-9">
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th style="text-align: center" scope="col">Mã đơn hàng</th>
-                        <th style="text-align: center" scope="col">Ngày mua</th>
-                        <th style="text-align: center" scope="col">Sản phẩm</th>
-                        <th style="text-align: center" scope="col">Tổng tiền</th>
-                        <th style="text-align: center" scope="col">Trạng thái đơn hàng</th>
+                    <tr class="row">
+                        <th class="col-sm-1" style="text-align: center" scope="col">Mã</th>
+                        <th class="col-sm-1" style="text-align: center" scope="col">Ngày mua</th>
+                        <th class="col-sm-3" style="text-align: center" scope="col">Sản phẩm</th>
+                        <th class="col-sm-1" style="text-align: center" scope="col">Tổng tiền</th>
+                        <th class="col-sm-4" style="text-align: center" scope="col">Địa chỉ</th>
+                        <th class="col-sm-2" style="text-align: center" scope="col">Trạng thái</th>
 
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th style="text-align: center" scope="row">1</th>
-                        <td height="60" class="text-center">11/11/2011</td>
-                        <td height="60" class="text-center">Minimalistic shop</td>
-                        <td height="60" class="text-center">123 000</td>
-                        <td height="60" class="text-center">Giao hàng thành công</td>
+                <tbody class="row">
+                    {{#each transactions}}
+                    <tr class="row">
+                        <td style="text-align: center" class="col-1">
+                            <div>
+                                <span style="font-weight: 500">1</span>
+                            </div>
+                        </td>
+                        <td style="text-align: center" class="col-2">
+                            <div>
+                                {{formatDate createdAt}}
+                            </div>
+                        </td>
+                        <td style="text-align: center" class="col-5">
+                            {{#each listProducts}}
+                            <div>
+                                {{nameProduct}}.
+                            </div>
+                            {{/each}}
+                        </td>
+                        <td style="text-align: center" class="col-1">
+                            <div>
+                                {{total}}
+                            </div>
+                        </td>
+                        <td style="text-align: center" class="col-2">
+                            <div>
+                                {{address}}
+                            </div>
+                        </td>
+                        <td style="text-align: center" class="col-1">
+                            <div>
+                                {{formatStatus status}}
+                            </div>
+
+                        </td>
                     </tr>
-                    <tr>
-                        <th style="text-align: center" scope="row">2</th>
-                        <td height="60" class="text-center">11/11/2011</td>
-                        <td height="60" class="text-center">Minimalistic shop</td>
-                        <td height="60" class="text-center">123 000</td>
-                        <td height="60" class="text-center">Đang giao</td>
-                    </tr>
-                    <tr>
-                        <th style="text-align: center" scope="row">3</th>
-                        <td height="60" class="text-center">11/11/2011</td>
-                        <td height="60" class="text-center">Minimalistic shop</td>
-                        <td height="60" class="text-center">123 000</td>
-                        <td height="60" class="text-center">Chưa giao</td>
-                    </tr>
+                    {{/each}}
                 </tbody>
             </table>
         </div>

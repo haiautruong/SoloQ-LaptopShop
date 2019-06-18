@@ -1,5 +1,6 @@
 const dbs = require('../database/index');
 const bcrypt = require('bcrypt');
+const productHelper = require('../helpers/productHelper');
 
 let category = dbs.category;
 let User = dbs.user;
@@ -155,13 +156,19 @@ exports.placeOrder = (req, res) => {
 exports.history = (req, res) => {
     if (req.isAuthenticated()) {
         let userSession = req.user;
-        Brand.getAllBrands().exec((err, listBrand) => {
-            if(err){
-                console.log(err);
+        Transaction.gettransaction(userSession._id).exec((err, transactions) =>{
+            if(err) {
+                console.log("history err: ", err);
             }
             else{
-                res.render('user/history', { listCategory, userSession, listBrand });
-
+                Brand.getAllBrands().exec((err, listBrand) => {
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        res.render('user/history', { listCategory, userSession, listBrand, transactions });
+                    }
+                })
             }
         })
     }
