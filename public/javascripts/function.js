@@ -20,6 +20,10 @@ function formatCurrency(value){
 function unFormatCurrency(value){
     return accounting.unformat(value);
 }
+function formatDate(date){
+    return date.toLocaleString();
+    
+}
 
 function addCart(idCart, counter) {
 
@@ -142,25 +146,25 @@ $(document).ready(function () {
                     if (element._id === elm.idCart) {
                         let sumItem = element.price * parseInt(elm.counter);
                         total += sumItem;
-                        sumItem = formatCurrency(sumItem);
+                        sumItemFormat = formatCurrency(sumItem);
                         let price = formatCurrency(element.price);
                         html += `<tr class="td-save-${idx}" id="${element._id}">
                         <td>
                             <div>
-                                <img src="/images/${element.image}" alt="" style="width: 150px" />
-                                <span style="font-weight: 500">${element.name}</span>
+                                <a href="/product/detail/${element._id}"><img src="/images/${element.image}" alt="" style="width: 150px" /></a>
+                                <a href="/product/detail/${element._id}" style="font-weight: 500"> ${element.name}</a>
                             </div>
                         </td>
-                        <td id="price-${idx}">
+                        <td id="price-${idx}" class="${element.price}">
                             ${price}
                         </td>
                         <td>
                             <div class="product_count">
                                 <input type="number" name="qty" id="${idx}" maxlength="12" value="${elm.counter}"
-                                    title="Quantity:" class="input-text qty btn-delete-product" min="1"></div>
+                                    title="Quantity:" class="input-text qty btn-inc-dec-product" min="1"></div>
                         </td>
-                        <td id="sub-total-${idx}">
-                            ${sumItem}
+                        <td id="sub-total-${idx}" class="${sumItem}">
+                            ${sumItemFormat}
                         </td>
                         <td>
                             <button class="btn del-btn" style="background-color: transparent" id="del-btn-${idx}">
@@ -177,12 +181,12 @@ $(document).ready(function () {
 
                 idx++;
             });
-            total = formatCurrency(total);
+            totalFomart = formatCurrency(total);
             html += `<tr>
                         <td colspan="3" style="text-align: right; font-weight: bold; padding-right: 18px">Tổng
                             cộng</td>
-                        <td colspan="2" id="id-order-total">
-                            ${total}
+                        <td colspan="2" id="id-order-total" class="${total}">
+                            ${totalFomart}
                         </td>
 
                     </tr>`;
@@ -205,7 +209,7 @@ $(document).ready(function (){
         window.location.reload();
     })
 });
-//pagination store
+//pagination comment
 $(document).ready(function () {
     let id = window.location.pathname.split('/')[3];
 
@@ -240,11 +244,12 @@ $(document).ready(function () {
                 for (let i = elm.rating + 1; i <= 5; i++) {
                     starHtml += `<i class="fa fa-star-o empty"></i>`;
                 }
-
+                let date = elm.createdAt;
+                date = formatDate(date);
                 html += `<li>
                     <div class="review-heading">
                         <h5 class="name">${elm.name}</h5>
-                        <p class="date">${elm.createdAt}</p>
+                        <p class="date">${date}</p>
                         <div class="review-rating">
                             ${starHtml}
                         </div>
@@ -260,7 +265,7 @@ $(document).ready(function () {
 
 });
 
-//pagination comme
+//pagination store
 $(document).ready(function () {
     let type = window.location.pathname.split('/')[2];
     let id = window.location.pathname.split('/')[3];
@@ -294,7 +299,7 @@ $(document).ready(function () {
                     <div class="product">
                         <a href="/product/detail/${elm._id}" class="product-detail-href">
                         <div class="product-img">
-                            <img style="height: 200px" src="/images/${elm.image}" alt="">
+                            <img style="height: 130px" src="/images/${elm.image}" alt="">
                         </div>
                         <div class="product-body">
                             <p class="product-category">${elm.categoryCode.name} - ${elm.brandCode.name}</p>
@@ -330,7 +335,6 @@ $(document).ready(function () {
         : [];
 
     if (currentList.length === 0) {
-        console.log("null");
         htmlEmpty = `<p>Giỏ hàng chưa có sản phẩm</p>`;
         $("#order").html(htmlEmpty);
         return;
@@ -408,25 +412,30 @@ $(document).ready(function () {
                 <button type="submit" onclick="pay()" class="primary-btn order-submit form-control" style="padding-bottom: 50px">Đặt hàng</button>
                 <input name="listProductPay" value='${historyJson}' readonly style="display: none">
             </div>`;
-
             $("#order").html(html);
         }
     });
 });
 
 $(document).ready(function () {
-    $(".btn-delete-product").on('change', function (e) {
+    $(".btn-inc-dec-product").on('change', function (e) {
         const idx = $(this).attr('id');
         const id = $(`.td-save-${idx}`).attr('id');
         let counter = parseInt($(this).val());
-        let price = parseInt($(`#price-${idx}`).text());
+        let price = $(`#price-${idx}`).attr('class');
+        price = parseInt(price);
 
-        let subTotal = parseInt($(`#sub-total-${idx}`).text());
+        let subTotal = $(`#sub-total-${idx}`).attr('class');
+        subTotal = parseInt(subTotal);
 
-        let orderTotal = parseInt($('#id-order-total').text());
+        let orderTotal = $('#id-order-total').attr('class');
+        orderTotal = parseInt(orderTotal);
 
-        const newSubTotal = price * counter;
+        let newSubTotal = price * counter;
         orderTotal += (newSubTotal - subTotal);
+
+        newSubTotal = formatCurrency(newSubTotal);
+        orderTotal = formatCurrency(orderTotal);
 
         $(`#sub-total-${idx}`).html(newSubTotal);
         $('#id-order-total').html(orderTotal);

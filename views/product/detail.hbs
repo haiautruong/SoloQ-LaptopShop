@@ -58,17 +58,17 @@
 						<p>Lượt xem: {{product.view}} <i class="fa fa-eye"></i></p>
 					</div>
 					<div>
-						<h3 class="product-price">{{product.price}}</h3>
+						<h3 class="product-price">{{formatCurrency product.price}}</h3>
 					</div>
 					<p>{{product.voucher}}</p>
 
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn" id="{{product._id}}" onclick="addCart(product.id)"><i
+						<button class="add-to-cart-btn" id="{{product._id}}" onclick="addCart(this.id)"><i
 								class="fa fa-shopping-cart"></i> thêm vào giỏ</button>
 					</div>
 					<ul class="product-links">
 						<li>Danh mục:</li>
-						<li><a href="/product/category/{{product.category._id}}">{{product.categoryCode.name}}</a></li>
+						<li><a href="/product/category/{{product.categoryCode._id}}">{{product.categoryCode.name}}</a></li>
 					</ul>
 				</div>
 			</div>
@@ -229,13 +229,13 @@
 				<div class="product">
 					<a href="/product/detail/{{_id}}" class="product-detail-href">
 						<div class="product-img">
-							<img src="/images/{{image}}" alt="">
+							<img src="/images/{{image}}" style="height: 150px" alt="">
 						</div>
 					</a>
 					<div class="product-body">
-						<p class="product-category">{{categoryCode.name}}</p>
+						<a class="product-category" href="/product/category/{{categoryCode._id}}" >{{categoryCode.name}}</a>
 						<h3 class="product-name"><a href="/product/detail/{{_id}}">{{name}}</a></h3>
-						<h4 class="product-price">{{price}}</h4>
+						<h4 class="product-price">{{{formatCurrency price}}}</h4>
 						<div class="product-rating">
 						</div>
 						<div class="product-btns">
@@ -244,7 +244,7 @@
 						</div>
 					</div>
 					<div class="add-to-cart">
-						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> thêm vào giỏ</button>
+						<button class="add-to-cart-btn"><i class="fa fa-shopping-cart" id="{{_id}}" onclick="addCart(this.id)"></i> thêm vào giỏ</button>
 					</div>
 				</div>
 			</div>
