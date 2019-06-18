@@ -16,7 +16,10 @@ app.engine('hbs', exphbs({
   defaultLayout: 'main',
   layoutsDir: 'views/layouts',
   helpers: {
-    getStar: productHelpers.showStar
+    getStar: productHelpers.showStar,
+    formatDate: productHelpers.formatDate,
+    formatStatus: productHelpers.formatStatus,
+    formatCurrency: productHelpers.formatCurrency
   }
 }));
 

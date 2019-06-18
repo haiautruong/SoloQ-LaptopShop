@@ -4,10 +4,8 @@ let Product = dbs.product;
 let Comment = dbs.comment;
 
 exports.listProducts = (req, res) => {
-    console.log(req.query.list_products);
     //console.log("ABC", req.query);
     let arr = req.query.list_products;
-    console.log('arr', arr);
 
     let listIdProduct = arr.map(elm => {
         return mongoose.Types.ObjectId(elm.idCart);
@@ -19,10 +17,8 @@ exports.listProducts = (req, res) => {
         }
     }).populate('categoryCode')
         .exec((err, docs) => {
-            console.log(docs);
             res.send(docs);
         });
-
 
 }
 

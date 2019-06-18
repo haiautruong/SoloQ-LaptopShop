@@ -13,15 +13,31 @@ document
     .innerHTML = "" + qtyCart;
 // --------------------------------
 
-function addCart(idCart) {
+function formatCurrency(value){
+    return value.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+}
+
+function unFormatCurrency(value){
+    return accounting.unformat(value);
+}
+
+function addCart(idCart, counter) {
+
     if (isSupportLocalStorge) {
 
         let item = currentList.find((elm) => {
             return (elm.idCart === idCart)
         })
 
+        let step = 0;
         if (item) {
-            item.counter++;
+            if (counter) {
+                step =  counter - item.counter;
+                item.counter = counter;
+            } else {
+                step = 1;
+                item.counter++;
+            }
         } else {
             item = {
                 counter: 1,
@@ -29,19 +45,18 @@ function addCart(idCart) {
             }
             currentList.push(item);
         }
-
-        qtyCart++;
+        qtyCart += step;
         document
             .getElementById('qtyCart')
             .innerHTML = "" + qtyCart;
-        console.log(currentList);
+
         localStorage.setItem("listItemCart", JSON.stringify(currentList));
     }
 }
 
 function handleCart(id) {
     let url = '';
-    let total = "";
+    let html = "";
     let currentList = localStorage.getItem("listItemCart")
         ? JSON.parse(localStorage.getItem('listItemCart'))
         : [];
@@ -58,34 +73,35 @@ function handleCart(id) {
         },
         async: false,
         success: (res, status) => {
-
+            let total = 0;
             res.forEach(element => {
-                currentList.forEach(elm => {
 
+                currentList.forEach(elm => {
                     if (element._id === elm.idCart) {
-                        total += `
+                        total += (parseInt(element.price) * parseInt(elm.counter));
+                        let price = formatCurrency(element.price);
+                        html += `
                 <div class="product-widget">
                     <div class="product-img">
                         <img src="/images/${element.image}" alt="">
                     </div>
                     <div class="product-body">
                         <h3 class="product-name">
-                            <a href="/product/detail/${element._id}">product name goes here</a>
+                            <a href="/product/detail/${element._id}">${element.name}</a>
                         </h3>
                         <h4 class="product-price">
-                            <span class="qty">${elm.counter}x</span>${element.price}</h4>
+                            <span class="qty">${elm.counter}x</span>${price}</h4>
                     </div>
-                    <button class="delete">
-                        <i class="fa fa-close"></i>
-                    </button>
                 </div>`;
                         return;
                     }
                 });
-
             });
+            total = formatCurrency(total);
 
-            $('#list_product').html(total);
+            $('#cart-summary').html(`<h5>Tổng cộng: ${total}</h5>`)
+
+            $('#list_product').html(html);
         }
     });
 
@@ -120,33 +136,34 @@ $(document).ready(function () {
         async: false,
         success: (res, status) => {
             let total = 0;
+            let idx = 0;
             res.forEach(element => {
                 currentList.forEach(elm => {
-
                     if (element._id === elm.idCart) {
                         let sumItem = element.price * parseInt(elm.counter);
                         total += sumItem;
-                        console.log(sumItem)
-                        html += `<tr>
+                        sumItem = formatCurrency(sumItem);
+                        let price = formatCurrency(element.price);
+                        html += `<tr class="td-save-${idx}" id="${element._id}">
                         <td>
                             <div>
                                 <img src="/images/${element.image}" alt="" style="width: 150px" />
                                 <span style="font-weight: 500">${element.name}</span>
                             </div>
                         </td>
-                        <td>
-                            ${element.price}
+                        <td id="price-${idx}">
+                            ${price}
                         </td>
                         <td>
                             <div class="product_count">
-                                <input type="number" name="qty" id="sst" maxlength="12" value="${elm.counter}"
-                                    title="Quantity:" class="input-text qty"></div>
+                                <input type="number" name="qty" id="${idx}" maxlength="12" value="${elm.counter}"
+                                    title="Quantity:" class="input-text qty btn-delete-product" min="1"></div>
                         </td>
-                        <td>
+                        <td id="sub-total-${idx}">
                             ${sumItem}
                         </td>
                         <td>
-                            <button class="btn" style="background-color: transparent">
+                            <button class="btn del-btn" style="background-color: transparent" id="del-btn-${idx}">
                                 <span style="color: Tomato;">
                                     <i id="delete" class="fa fa-trash-o fa-2x"></i>
                                 </span>
@@ -158,12 +175,13 @@ $(document).ready(function () {
                     }
                 });
 
+                idx++;
             });
-
+            total = formatCurrency(total);
             html += `<tr>
                         <td colspan="3" style="text-align: right; font-weight: bold; padding-right: 18px">Tổng
                             cộng</td>
-                        <td colspan="2">
+                        <td colspan="2" id="id-order-total">
                             ${total}
                         </td>
 
@@ -176,6 +194,17 @@ $(document).ready(function () {
     });
 });
 
+//dele button
+$(document).ready(function (){
+    $('.del-btn').on('click', function(e){
+        let id = $(this).attr('id').split('-')[2];
+        id = parseInt(id);
+        console.log(id);
+        console.log(currentList.splice(id, 1));
+        localStorage.setItem('listItemCart', JSON.stringify(currentList));
+        window.location.reload();
+    })
+});
 //pagination store
 $(document).ready(function () {
     let id = window.location.pathname.split('/')[3];
@@ -231,7 +260,7 @@ $(document).ready(function () {
 
 });
 
-//pagination comment
+//pagination comme
 $(document).ready(function () {
     let type = window.location.pathname.split('/')[2];
     let id = window.location.pathname.split('/')[3];
@@ -259,6 +288,7 @@ $(document).ready(function () {
             let html = "";
             pageContent.forEach(elm => {
                 console.log("paging-product: ", elm);
+                let price = formatCurrency(elm.price);
                 html += `
                 <div class="col-md-4 col-xs-6">
                     <div class="product">
@@ -269,7 +299,7 @@ $(document).ready(function () {
                         <div class="product-body">
                             <p class="product-category">${elm.categoryCode.name} - ${elm.brandCode.name}</p>
                             <h3 class="product-name"><a href="/product/detail/${elm._id}">${elm.name}</a></h3>
-                            <h4 class="product-price">${elm.price}</h4>
+                            <h4 class="product-price">${price}</h4>
                             <div class="product-btns">
                                 <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">xem ngay</span></button>
                             </div>
@@ -305,8 +335,8 @@ $(document).ready(function () {
         $("#order").html(htmlEmpty);
         return;
     }
-    
-    
+
+
     let html = `<div class="order-summary">
                     <div class="order-col">
                         <div><strong>SẢN PHẨM</strong></div>
@@ -334,7 +364,8 @@ $(document).ready(function () {
                     if (element._id === elm.idCart) {
                         let sumItem = element.price * parseInt(elm.counter);
                         total += sumItem;
-                        console.log(sumItem)
+                        sumItem = formatCurrency(sumItem);
+
                         html += `<div class="order-col">
                                     <div>${elm.counter} x ${element.name}</div>
                                     <div>${sumItem}</div>
@@ -343,7 +374,7 @@ $(document).ready(function () {
                             idProduct: elm.idCart,
                             nameProduct: element.name,
                             quantity: elm.counter,
-                            price: element.price 
+                            price: element.price
 
                         }
                         history.listProducts.push(product);
@@ -353,8 +384,8 @@ $(document).ready(function () {
             });
             history.total = total;
             let historyJson = JSON.stringify(history).toString();
-            console.log("history",typeof historyJson);
-
+            console.log("history", typeof historyJson);
+            total = formatCurrency(total);
             html += `</div>
                     <div class="order-col">
                         <div>Phí vận chuyển</div>
@@ -380,5 +411,26 @@ $(document).ready(function () {
 
             $("#order").html(html);
         }
+    });
+});
+
+$(document).ready(function () {
+    $(".btn-delete-product").on('change', function (e) {
+        const idx = $(this).attr('id');
+        const id = $(`.td-save-${idx}`).attr('id');
+        let counter = parseInt($(this).val());
+        let price = parseInt($(`#price-${idx}`).text());
+
+        let subTotal = parseInt($(`#sub-total-${idx}`).text());
+
+        let orderTotal = parseInt($('#id-order-total').text());
+
+        const newSubTotal = price * counter;
+        orderTotal += (newSubTotal - subTotal);
+
+        $(`#sub-total-${idx}`).html(newSubTotal);
+        $('#id-order-total').html(orderTotal);
+
+        addCart(id, counter);
     });
 });

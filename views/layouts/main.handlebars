@@ -133,10 +133,11 @@
                                 </a>
                                 <div class="cart-dropdown">
                                     <div class="cart-list" id="list_product">
+                                        {{!-- listProducts --}}
                                     </div>
-                                    <div class="cart-summary">
-                                        <small>3 Item(s) selected</small>
-                                        <h5>Tổng cộng: $2940.00</h5>
+                                    <div class="cart-summary"id="cart-summary" >
+                                        {{!-- <small>3 Item(s) selected</small>
+                                        <h5>Tổng cộng: $2940.00</h5> --}}
                                     </div>
                                     <div class="cart-btns">
                                         <a href="/users/cart">View Cart</a>
@@ -358,6 +359,7 @@
     <script src="/javascripts/nouislider.min.js"></script>
     <script src="/javascripts/main.js"></script>
     <script src="/javascripts/function.js"></script>
+    <script src="https://raw.githubusercontent.com/openexchangerates/accounting.js/master/accounting.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
 </body>

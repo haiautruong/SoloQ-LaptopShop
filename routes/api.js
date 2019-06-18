@@ -12,6 +12,4 @@ router.get('/get-comments', (req, res) => {
 
 router.get('/get-cart', (req, res) => api.cart(req, res));
 
-
-
 module.exports = router;
