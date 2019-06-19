@@ -219,7 +219,7 @@ $(document).ready(function () {
 
     $('#commentsPagination').pagination({
         //dataSource: `http://localhost:3000/api/get-comments?id=${id}`,
-        dataSource: `http://soloq-laptopshop.herokuapp.com/api/get-comments?id=${id}`,        
+        dataSource: `/api/get-comments?id=${id}`,        
         locator: 'comments',
         totalNumberLocator: function (response) {
             return response.total;
@@ -277,7 +277,7 @@ $(document).ready(function () {
 
     $('#pagination-store').pagination({
         //dataSource: `http://localhost:3000/api/store-pagination?name=${type}&id=${id}`,
-        dataSource: `http://soloq-laptopshop.herokuapp.com/api/store-pagination?name=${type}&id=${id}`,
+        dataSource: `/api/store-pagination?name=${type}&id=${id}`,
         locator: 'products',
         totalNumberLocator: function (response) {
             return response.total;
