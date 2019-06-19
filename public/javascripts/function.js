@@ -276,7 +276,8 @@ $(document).ready(function () {
     }
 
     $('#pagination-store').pagination({
-        dataSource: `http://localhost:3000/api/store-pagination?name=${type}&id=${id}`,
+        //dataSource: `http://localhost:3000/api/store-pagination?name=${type}&id=${id}`,
+        dataSource: `http://soloq-laptopshop.herokuapp.com/api/store-pagination?name=${type}&id=${id}`,
         locator: 'products',
         totalNumberLocator: function (response) {
             return response.total;
