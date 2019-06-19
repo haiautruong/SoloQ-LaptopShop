@@ -7,6 +7,7 @@ const passport = require('passport');
 
 const controller = require("../controllers/UserController");
 
+router.get("/logout", (req, res) => controller.logout(req, res));
 router.get("/login", (req, res) => controller.indexLogin(req, res));
 router.get("/signup", (req, res, next) => controller.indexSignup(req, res));
 
