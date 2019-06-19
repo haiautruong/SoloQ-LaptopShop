@@ -218,7 +218,8 @@ $(document).ready(function () {
     }
 
     $('#commentsPagination').pagination({
-        dataSource: `http://localhost:3000/api/get-comments?id=${id}`,
+        //dataSource: `http://localhost:3000/api/get-comments?id=${id}`,
+        dataSource: `http://soloq-laptopshop.herokuapp.com/api/get-comments?id=${id}`,        
         locator: 'comments',
         totalNumberLocator: function (response) {
             return response.total;
